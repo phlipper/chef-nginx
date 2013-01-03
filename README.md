@@ -1,4 +1,4 @@
-# chef-nginx
+# chef-nginx [![Build Status](https://travis-ci.org/phlipper/chef-nginx.png?branch=master)](https://travis-ci.org/phlipper/chef-nginx)
 
 ## Description
 
