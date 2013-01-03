@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>chef-nginx by phlipper</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>chef-nginx</h1>
+        <p>Chef cookbook for Nginx</p>
+        <p class="view"><a href="https://github.com/phlipper/chef-nginx">View the Project on GitHub <small>phlipper/chef-nginx</small></a></p>
+        <ul>
+          <li><a href="https://github.com/phlipper/chef-nginx/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/phlipper/chef-nginx/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/phlipper/chef-nginx">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><a href="https://travis-ci.org/phlipper/chef-nginx"><img src="https://travis-ci.org/phlipper/chef-nginx.png?branch=master" alt="Build Status"></a></p>
+
+<h2>Description</h2>
+
+<p>Installs the <a href="http://nginx.org">Nginx</a> web server.</p>
+
+<h2>Requirements</h2>
+
+<h3>Supported Platforms</h3>
+
+<p>The following platforms are supported by this cookbook, meaning that the
+recipes should run on these platforms without error:</p>
+
+<ul>
+<li>Ubuntu</li>
+<li>Debian</li>
+</ul><h3>Cookbooks</h3>
+
+<ul>
+<li>
+<a href="http://community.opscode.com/cookbooks/apt">apt</a> Opscode LWRP Cookbook</li>
+</ul><h3>Chef</h3>
+
+<p>It is recommended to use a version of Chef <code>&gt;= 10.16.4</code> as that is the target of my usage and testing, though this should work with most recent versions.</p>
+
+<h3>Ruby</h3>
+
+<p>This cookbook requires Ruby 1.9+ and is tested against:</p>
+
+<ul>
+<li>1.9.2</li>
+<li>1.9.3</li>
+</ul><h2>Recipes</h2>
+
+<ul>
+<li>
+<code>nginx</code> - The default recipe which sets up the repository.</li>
+<li>
+<code>nginx::configuration</code> - Internal recipe to setup the configuration files.</li>
+<li>
+<code>nginx::service</code> - Internal recipe to setup the service definition.</li>
+<li>
+<code>nginx::light</code> - Install and configure the <code>nginx-light</code> package.</li>
+</ul><h2>Usage</h2>
+
+<p>This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.</p>
+
+<h2>Attributes</h2>
+
+<div class="highlight"><pre><span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"dir"</span><span class="o">]</span>      <span class="o">=</span> <span class="s2">"/etc/nginx"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"log_dir"</span><span class="o">]</span>  <span class="o">=</span> <span class="s2">"/var/log/nginx"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"user"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"www-data"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"binary"</span><span class="o">]</span>   <span class="o">=</span> <span class="s2">"/usr/sbin/nginx"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"pid_file"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/var/run/nginx.pid"</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"log_format"</span><span class="o">]</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">FORMAT</span>
+<span class="sh">  '$remote_addr $host $remote_user [$time_local] "$request" '</span>
+<span class="sh">  '$status $body_bytes_sent "$http_referer" "$http_user_agent" "$gzip_ratio"'</span>
+<span class="no">FORMAT</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"daemon_disable"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">false</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"use_poll"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip"</span><span class="o">]</span>              <span class="o">=</span> <span class="s2">"on"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip_http_version"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"1.0"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip_buffers"</span><span class="o">]</span>      <span class="o">=</span> <span class="s2">"16 8k"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip_comp_level"</span><span class="o">]</span>   <span class="o">=</span> <span class="s2">"2"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip_proxied"</span><span class="o">]</span>      <span class="o">=</span> <span class="s2">"any"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip_vary"</span><span class="o">]</span>         <span class="o">=</span> <span class="s2">"on"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip_min_length"</span><span class="o">]</span>   <span class="o">=</span> <span class="s2">"0"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip_disable"</span><span class="o">]</span>      <span class="o">=</span> <span class="sx">%q|"MSIE [1-6].(?!.*SV1)"|</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"gzip_types"</span><span class="o">]</span>        <span class="o">=</span> <span class="sx">%w[</span>
+<span class="sx">  text/css text/javascript text/xml text/plain text/x-component</span>
+<span class="sx">  application/x-javascript application/javascript application/json</span>
+<span class="sx">  application/xml application/rss+xml image/svg+xml</span>
+<span class="sx">  font/truetype font/opentype application/vnd.ms-fontobject</span>
+<span class="sx">]</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"ignore_invalid_headers"</span><span class="o">]</span>      <span class="o">=</span> <span class="s2">"on"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"recursive_error_pages"</span><span class="o">]</span>       <span class="o">=</span> <span class="s2">"on"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"sendfile"</span><span class="o">]</span>                    <span class="o">=</span> <span class="s2">"on"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"server_name_in_redirect"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"off"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"server_tokens"</span><span class="o">]</span>               <span class="o">=</span> <span class="s2">"off"</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"buffers_enable"</span><span class="o">]</span>              <span class="o">=</span> <span class="kp">false</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"client_body_temp_path"</span><span class="o">]</span>       <span class="o">=</span> <span class="s2">"/var/spool/nginx-client-body 1 2"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"client_body_buffer_size"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"8k"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"client_header_buffer_size"</span><span class="o">]</span>   <span class="o">=</span> <span class="s2">"1k"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"client_max_body_size"</span><span class="o">]</span>        <span class="o">=</span> <span class="s2">"1m"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"large_client_header_buffers"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"4 8k"</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"tcp_nopush"</span><span class="o">]</span>  <span class="o">=</span> <span class="s2">"on"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"tcp_nodelay"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"off"</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"proxy_set_headers"</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span>
+  <span class="s2">"X-Real-IP $remote_addr"</span><span class="p">,</span>
+  <span class="s2">"X-Forwarded-For $proxy_add_x_forwarded_for"</span><span class="p">,</span>
+  <span class="s2">"Host $http_host"</span>
+<span class="o">]</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"proxy_redirect"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"off"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"proxy_max_temp_file_size"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">nil</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"proxy_read_timeout"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">nil</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"keepalive"</span><span class="o">]</span>             <span class="o">=</span> <span class="s2">"on"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"keepalive_timeout"</span><span class="o">]</span>     <span class="o">=</span> <span class="mi">65</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"send_timeout"</span><span class="o">]</span>          <span class="o">=</span> <span class="mi">5</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"client_header_timeout"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"client_body_timeout"</span><span class="o">]</span>   <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"worker_processes"</span><span class="o">]</span>   <span class="o">=</span> <span class="n">node</span><span class="o">[</span><span class="s2">"cpu"</span><span class="o">][</span><span class="s2">"total"</span><span class="o">]</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"worker_connections"</span><span class="o">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">[</span><span class="s2">"cpu"</span><span class="o">][</span><span class="s2">"total"</span><span class="o">].</span><span class="n">to_i</span> <span class="o">*</span> <span class="mi">1024</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"server_names_hash_bucket_size"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"conf_files"</span><span class="o">]</span> <span class="o">=</span> <span class="sx">%w[</span>
+<span class="sx">  general buffers gzip logs performance proxy timeouts ssl_session</span>
+<span class="sx">]</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"ssl_session_cache_enable"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"ssl_session_cache"</span><span class="o">]</span>        <span class="o">=</span> <span class="s2">"shared:SSL:10m"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"ssl_session_timeout"</span><span class="o">]</span>      <span class="o">=</span> <span class="s2">"10m"</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"passenger_enable"</span><span class="o">]</span>         <span class="o">=</span> <span class="kp">false</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"passenger_max_pool_size"</span><span class="o">]</span>  <span class="o">=</span> <span class="mi">6</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"passenger_pool_idle_time"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">300</span>
+</pre></div>
+
+<h2>TODO</h2>
+
+<p>Including, but not limited to ...</p>
+
+<ul>
+<li>Fully support all of the standard Chef-supported distributions</li>
+<li>Support additonal build configurations</li>
+<li>Support additonal configuration file attributes</li>
+<li>Provider for creating virtual hosts</li>
+</ul><h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>License</h2>
+
+<p><strong>chef-nginx</strong></p>
+
+<ul>
+<li>Freely distributable and licensed under the <a href="http://phlipper.mit-license.org/2013/license.html">MIT license</a>.</li>
+<li>Copyright (c) 2013 Phil Cohen (<a href="mailto:github@phlippers.net">github@phlippers.net</a>) <a href="http://coderwall.com/phlipper"><img src="http://api.coderwall.com/phlipper/endorsecount.png" alt="endorse"></a>
+</li>
+<li><a href="http://phlippers.net/">http://phlippers.net/</a></li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/phlipper">phlipper</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-10172882-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
