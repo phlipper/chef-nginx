@@ -1,0 +1,30 @@
+user <%= node["nginx"]["user"] %>;
+worker_processes <%= node["nginx"]["worker_processes"] %>;
+
+<% if node["nginx"]["daemon_disable"] -%>
+daemon off;
+<% end -%>
+
+error_log <%= node["nginx"]["log_dir"] %>/error.log;
+pid       <%= node["nginx"]["pid_file"] %>;
+
+events {
+  worker_connections <%= node["nginx"]["worker_connections"] %>;
+  accept_mutex <%= node["nginx"]["worker_processes"].to_i > 1 ? "on" : "off" %>;
+  <% if node["nginx"]["use_poll"] %>
+  use epoll;
+  <% end %>
+}
+
+http {
+  server_names_hash_bucket_size <%= node["nginx"]["server_names_hash_bucket_size"] %>;
+
+  include      <%= node["nginx"]["dir"] %>/mime.types;
+  default_type application/octet-stream;
+
+  # additional config
+  include <%= node["nginx"]["dir"] %>/conf.d/*.conf;
+
+  # virtual hosting
+  include <%= node["nginx"]["dir"] %>/sites-enabled/*;
+}

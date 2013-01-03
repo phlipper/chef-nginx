@@ -1,0 +1,15 @@
+<% if node["nginx"]["buffers_enable"] %>
+
+# Where to store the body of large client requests on disk
+# NGINX will stream this to disk before posting it to your Mongrels,
+# preventing slow clients tying up your app.
+client_body_temp_path <%= node["nginx"]["client_body_temp_path"] %>;
+
+# Max size of a request from a client (usually a POST).  This will limit
+# the size of file uploads to your app
+client_body_buffer_size     <%= node["nginx"]["client_body_buffer_size"] %>;
+client_header_buffer_size   <%= node["nginx"]["client_header_buffer_size"] %>;
+client_max_body_size        <%= node["nginx"]["client_max_body_size"] %>;
+large_client_header_buffers <%= node["nginx"]["large_client_header_buffers"] %>;
+
+<% end %>

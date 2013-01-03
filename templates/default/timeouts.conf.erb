@@ -1,0 +1,5 @@
+## Timeouts
+client_body_timeout   <%= node["nginx"]["client_body_timeout"] %>;
+client_header_timeout <%= node["nginx"]["client_header_timeout"] %>;
+keepalive_timeout     <%= node["nginx"]["keepalive_timeout"] %>;
+send_timeout          <%= node["nginx"]["send_timeout"] %>;

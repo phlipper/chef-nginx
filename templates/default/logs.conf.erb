@@ -1,0 +1,6 @@
+<% if node["nginx"]["log_format"] %>
+## Log Format
+log_format  main  <%= node["nginx"]["log_format"] %>;
+<% end %>
+
+access_log <%= node["nginx"]["log_dir"] %>/access.log main;

@@ -1,0 +1,19 @@
+## Compression
+gzip              <%= node["nginx"]["gzip"] %>;
+
+<% if node["nginx"]["gzip"] == "on" %>
+
+gzip_buffers      <%= node["nginx"]["gzip_buffers"] %>;
+
+# compression level between 1 and 9
+gzip_comp_level   <%= node["nginx"]["gzip_comp_level"] %>;
+gzip_http_version <%= node["nginx"]["gzip_http_version"] %>;
+gzip_min_length   <%= node["nginx"]["gzip_min_length"] %>;
+gzip_types        <%= node["nginx"]["gzip_types"].join(" ") %>;
+gzip_vary         <%= node["nginx"]["gzip_vary"] %>;
+gzip_proxied      <%= node["nginx"]["gzip_proxied"] %>;
+
+# Some version of IE 6 don't handle compression well on some mime-types, so just disable them
+gzip_disable <%= node["nginx"]["gzip_disable"] %>;
+
+<% end %>

@@ -1,0 +1,4 @@
+<% if node["nginx"]["ssl_session_cache_enable"] %>
+ssl_session_cache    <%= node["nginx"]["ssl_session_cache"] %>;
+ssl_session_timeout  <%= node["nginx"]["ssl_session_timeout"] %>;
+<% end %>

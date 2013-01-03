@@ -1,0 +1,13 @@
+<% for header in node["nginx"]["proxy_set_headers"] || [] %>
+proxy_set_header   <%= header %>;
+<% end %>
+
+<% if node["nginx"]["proxy_read_timeout"] %>
+proxy_read_timeout <%= node["nginx"]["proxy_read_timeout"] %>;
+<% end %>
+
+proxy_redirect     <%= node["nginx"]["proxy_redirect"] %>;
+
+<% if node["nginx"]["proxy_max_temp_file_size"] %>
+proxy_max_temp_file_size <%= node["nginx"]["proxy_max_temp_file_size"] %>;
+<% end %>
