@@ -9,7 +9,8 @@ version          "0.1.0"
 recipe "nginx", "The default recipe which sets up the repository."
 recipe "nginx::configuration", "Internal recipe to setup the configuration files."
 recipe "nginx::service", "Internal recipe to setup the service definition."
-recipe "nginx::light", "Install and configure the `nginx-light` package."
+recipe "nginx::server", "Install and configure the `nginx` package."
+recipe "nginx::debug", "Install and configure the `nginx-debug` package."
 
 depends "apt"
 

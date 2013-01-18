@@ -36,7 +36,8 @@ This cookbook requires Ruby 1.9+ and is tested against:
 * `nginx` - The default recipe which sets up the repository.
 * `nginx::configuration` - Internal recipe to setup the configuration files.
 * `nginx::service` - Internal recipe to setup the service definition.
-* `nginx::light` - Install and configure the `nginx-light` package.
+* `nginx::server` - Install and configure the `nginx` package.
+* `nginx::debug` - Install and configure the `nginx-debug` package.
 
 
 ## Usage
