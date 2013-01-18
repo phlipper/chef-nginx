@@ -9,6 +9,6 @@ apt_repository "nginx" do
   distribution node["lsb"]["codename"]
   components ["nginx"]
   action :add
-  key "http://sysoev.ru/pgp.txt"
+  key "http://nginx.org/keys/nginx_signing.key"
   notifies :run, "execute[apt-get update]", :immediately
 end
