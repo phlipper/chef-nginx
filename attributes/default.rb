@@ -83,3 +83,5 @@ default["nginx"]["ssl_session_timeout"]      = "10m"
 default["nginx"]["passenger_enable"]         = false
 default["nginx"]["passenger_max_pool_size"]  = 6
 default["nginx"]["passenger_pool_idle_time"] = 300
+
+default["nginx"]["enable_stub_status"] = true

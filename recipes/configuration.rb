@@ -39,10 +39,12 @@ for config_file in node["nginx"]["conf_files"]
   end
 end
 
-cookbook_file "#{node["nginx"]["dir"]}/conf.d/nginx_status.conf" do
-  source "nginx_status.conf"
-  owner "root"
-  group "root"
-  mode "0644"
-  notifies :restart, "service[nginx]", :immediately
+if node["nginx"]["enable_stub_status"]
+  cookbook_file "#{node["nginx"]["dir"]}/conf.d/nginx_status.conf" do
+    source "nginx_status.conf"
+    owner "root"
+    group "root"
+    mode "0644"
+    notifies :restart, "service[nginx]", :immediately
+  end
 end
