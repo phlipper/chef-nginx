@@ -10,5 +10,4 @@ apt_repository "nginx" do
   components ["nginx"]
   action :add
   key "http://nginx.org/keys/nginx_signing.key"
-  notifies :run, "execute[apt-get update]", :immediately
 end
