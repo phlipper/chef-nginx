@@ -1,7 +1,7 @@
 name             "nginx"
 maintainer       "Phil Cohen"
 maintainer_email "github@phlippers.net"
-license          "All rights reserved"
+license          "MIT"
 description      "Installs/configures nginx"
 long_description "Please refer to README.md"
 version          "0.4.2"
