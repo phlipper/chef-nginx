@@ -148,6 +148,14 @@ Including, but not limited to ...
 5. Create new Pull Request
 
 
+## Contributors
+
+Many thanks go to the following [contributors](https://github.com/phlipper/chef-nginx/graphs/contributors) who have helped to make this cookbook even better:
+
+* **[@jtimberman](https://github.com/jtimberman)**
+    * add license file
+
+
 ## License
 
 **chef-nginx**
