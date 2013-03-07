@@ -154,6 +154,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 
 * **[@jtimberman](https://github.com/jtimberman)**
     * add license file
+    * set executable bit for directories
 
 
 ## License
