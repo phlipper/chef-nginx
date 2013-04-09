@@ -69,7 +69,9 @@ recipes should run on these platforms without error:</p>
 <li>
 <code>nginx::service</code> - Internal recipe to setup the service definition.</li>
 <li>
-<code>nginx::light</code> - Install and configure the <code>nginx-light</code> package.</li>
+<code>nginx::server</code> - Install and configure the <code>nginx</code> package.</li>
+<li>
+<code>nginx::debug</code> - Install and configure the <code>nginx-debug</code> package.</li>
 </ul><h2>Usage</h2>
 
 <p>This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.</p>
@@ -152,6 +154,9 @@ recipes should run on these platforms without error:</p>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"passenger_enable"</span><span class="o">]</span>         <span class="o">=</span> <span class="kp">false</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"passenger_max_pool_size"</span><span class="o">]</span>  <span class="o">=</span> <span class="mi">6</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"passenger_pool_idle_time"</span><span class="o">]</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"enable_stub_status"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"status_port"</span><span class="o">]</span>        <span class="o">=</span> <span class="mi">80</span>
 </pre></div>
 
 <h2>TODO</h2>
@@ -171,7 +176,27 @@ recipes should run on these platforms without error:</p>
 <li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create new Pull Request</li>
-</ol><h2>License</h2>
+</ol><h2>Contributors</h2>
+
+<p>Many thanks go to the following <a href="https://github.com/phlipper/chef-nginx/graphs/contributors">contributors</a> who have helped to make this cookbook even better:</p>
+
+<ul>
+<li>
+<strong><a href="https://github.com/jtimberman">@jtimberman</a></strong>
+
+<ul>
+<li>add license file</li>
+<li>set executable bit for directories</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/dwradcliffe">@dwradcliffe</a></strong>
+
+<ul>
+<li>add attribute for nginx status port</li>
+</ul>
+</li>
+</ul><h2>License</h2>
 
 <p><strong>chef-nginx</strong></p>
 
