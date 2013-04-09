@@ -1,6 +1,6 @@
 # Nginx status
 server {
-  listen 127.0.0.1:80;
+  listen 127.0.0.1:<%= @port %>;
   server_name localhost;
   location /nginx_status {
     stub_status on;
