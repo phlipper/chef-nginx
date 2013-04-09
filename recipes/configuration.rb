@@ -39,11 +39,12 @@ for config_file in node["nginx"]["conf_files"]
   end
 end
 
-cookbook_file "#{node["nginx"]["dir"]}/conf.d/nginx_status.conf" do
-  source "nginx_status.conf"
+template "#{node["nginx"]["dir"]}/conf.d/nginx_status.conf" do
+  source "nginx_status.conf.erb"
   owner "root"
   group "root"
   mode "0644"
   notifies :restart, "service[nginx]", :immediately
+  variables( :port => node["nginx"]["status_port"] )
   only_if { node["nginx"]["enable_stub_status"] }
 end
