@@ -126,6 +126,7 @@ default["nginx"]["passenger_max_pool_size"]  = 6
 default["nginx"]["passenger_pool_idle_time"] = 300
 
 default["nginx"]["enable_stub_status"] = true
+default["nginx"]["status_port"]        = 80
 ```
 
 
