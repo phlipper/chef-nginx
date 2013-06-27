@@ -159,6 +159,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * set executable bit for directories
 * **[@dwradcliffe](https://github.com/dwradcliffe)**
     * add attribute for nginx status port
+    * add attribute for nginx version
 
 
 ## License
