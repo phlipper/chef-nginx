@@ -161,6 +161,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * **[@dwradcliffe](https://github.com/dwradcliffe)**
     * add attribute for nginx status port
     * add attribute for nginx version
+    * add option to use PPA repository instead of official nginx repository
 
 
 ## License
