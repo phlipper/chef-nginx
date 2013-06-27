@@ -48,12 +48,13 @@ This cookbook installs the Nginx components if not present, and pulls updates if
 ## Attributes
 
 ```ruby
-default["nginx"]["dir"]      = "/etc/nginx"
-default["nginx"]["log_dir"]  = "/var/log/nginx"
-default["nginx"]["user"]     = "www-data"
-default["nginx"]["binary"]   = "/usr/sbin/nginx"
-default["nginx"]["pid_file"] = "/var/run/nginx.pid"
-default["nginx"]["version"]  = nil
+default["nginx"]["dir"]        = "/etc/nginx"
+default["nginx"]["log_dir"]    = "/var/log/nginx"
+default["nginx"]["user"]       = "www-data"
+default["nginx"]["binary"]     = "/usr/sbin/nginx"
+default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
+default["nginx"]["version"]    = nil
+default["nginx"]["repository"] = "official" # or, "ppa"
 
 default["nginx"]["log_format"] = <<-FORMAT
   '$remote_addr $host $remote_user [$time_local] "$request" '
