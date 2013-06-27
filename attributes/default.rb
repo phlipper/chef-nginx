@@ -12,6 +12,7 @@ default["nginx"]["log_dir"]  = "/var/log/nginx"
 default["nginx"]["user"]     = "www-data"
 default["nginx"]["binary"]   = "/usr/sbin/nginx"
 default["nginx"]["pid_file"] = "/var/run/nginx.pid"
+default["nginx"]["version"]  = nil
 
 default["nginx"]["log_format"] = <<-FORMAT
   '$remote_addr $host $remote_user [$time_local] "$request" '
