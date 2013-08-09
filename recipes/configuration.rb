@@ -26,6 +26,7 @@ template "#{node["nginx"]["dir"]}/sites-available/default" do
   owner "root"
   group "root"
   mode  "0644"
+  not_if { node["nginx"]["skip_default_site"] }
 end
 
 for config_file in node["nginx"]["conf_files"]
