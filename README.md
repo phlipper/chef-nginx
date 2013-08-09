@@ -129,6 +129,8 @@ default["nginx"]["passenger_pool_idle_time"] = 300
 
 default["nginx"]["enable_stub_status"] = true
 default["nginx"]["status_port"]        = 80
+
+default["nginx"]["skip_default_site"]  = false
 ```
 
 
