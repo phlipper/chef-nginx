@@ -6,7 +6,7 @@
 
 include_recipe "nginx"
 
-package "nginx" do
+package node["nginx"]["package_name"] do
   version node["nginx"]["version"]
 end
 
