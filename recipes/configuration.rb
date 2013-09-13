@@ -36,7 +36,7 @@ for config_file in node["nginx"]["conf_files"]
     owner "root"
     group "root"
     mode  "0644"
-    notifies :restart, "service[nginx]", :immediately
+    notifies :restart, "service[nginx]", :delayed
   end
 end
 
@@ -45,7 +45,7 @@ template "#{node["nginx"]["dir"]}/conf.d/nginx_status.conf" do
   owner "root"
   group "root"
   mode "0644"
-  notifies :restart, "service[nginx]", :immediately
+  notifies :restart, "service[nginx]", :delayed
   variables( :port => node["nginx"]["status_port"] )
   only_if { node["nginx"]["enable_stub_status"] }
 end
