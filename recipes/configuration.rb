@@ -10,6 +10,7 @@ template "nginx.conf" do
   owner "root"
   group "root"
   mode  "0644"
+  notifies :restart, "service[nginx]", :delayed
 end
 
 %w[sites-available sites-enabled].each do |vhost_dir|
