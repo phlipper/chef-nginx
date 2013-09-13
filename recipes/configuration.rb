@@ -4,6 +4,15 @@
 #
 # Copyright 2013, Phil Cohen <github@phlippers.net>
 
+
+cookbook_file "/etc/nginx/mime.types" do
+  source "mime.types"
+  owner "root"
+  group "root"
+  mode  "0644"
+  notifies :restart, "service[nginx]", :delayed
+end
+
 template "nginx.conf" do
   path "#{node["nginx"]["dir"]}/nginx.conf"
   source "nginx.conf.erb"
