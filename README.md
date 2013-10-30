@@ -54,7 +54,7 @@ default["nginx"]["user"]       = "www-data"
 default["nginx"]["binary"]     = "/usr/sbin/nginx"
 default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
 default["nginx"]["version"]    = nil
-default["nginx"]["repository"] = "official" # or, "ppa"
+default["nginx"]["repository"] = "official" # or, "ppa", or "phusion"
 default["nginx"]["package_name"] = "nginx"  # nginx[-light|full|extras]
 
 default["nginx"]["log_format"] = <<-FORMAT
@@ -158,6 +158,8 @@ Including, but not limited to ...
 
 Many thanks go to the following [contributors](https://github.com/phlipper/chef-nginx/graphs/contributors) who have helped to make this cookbook even better:
 
+* **[@spovich](https://github.com/spovich)**
+    * add option to use Phusion-Passenger repository instead of official or PPA repo.
 * **[@jtimberman](https://github.com/jtimberman)**
     * add license file
     * set executable bit for directories
