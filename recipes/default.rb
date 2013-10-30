@@ -26,4 +26,15 @@ elsif node["nginx"]["repository"] == "ppa"
     deb_src true
   end
 
+elsif node["nginx"]["repository"] == "phusion"
+
+  apt_repository "nginx" do
+    uri "https://oss-binaries.phusionpassenger.com/apt/passenger"
+    distribution node["lsb"]["codename"]
+    components ["main"]
+    action :add
+    keyserver "keyserver.ubuntu.com"
+    key "561F9B9CAC40B2F7"
+    deb_src true
+  end
 end
