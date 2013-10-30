@@ -13,7 +13,7 @@ default["nginx"]["user"]       = "www-data"
 default["nginx"]["binary"]     = "/usr/sbin/nginx"
 default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
 default["nginx"]["version"]    = nil
-default["nginx"]["repository"] = "official"
+default["nginx"]["repository"] = "official" # ppa, phusion
 default["nginx"]["package_name"] = "nginx"  # nginx[-light|full|extras]
 
 default["nginx"]["log_format"] = <<-FORMAT
