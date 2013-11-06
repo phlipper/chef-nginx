@@ -13,7 +13,6 @@ default["nginx"]["user"]       = "www-data"
 default["nginx"]["binary"]     = "/usr/sbin/nginx"
 default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
 default["nginx"]["version"]    = nil
-default["nginx"]["repository"] = "official"
 default["nginx"]["package_name"] = "nginx"  # nginx[-light|full|extras]
 
 default["nginx"]["log_format"] = <<-FORMAT
@@ -91,3 +90,33 @@ default["nginx"]["enable_stub_status"] = true
 default["nginx"]["status_port"]        = 80
 
 default["nginx"]["skip_default_site"]  = false
+
+default["nginx"]["repository"] = "official"
+default["nginx"]["repository_sources"] = {
+  "official" => {
+    "uri"          => "http://nginx.org/packages/#{node["platform"]}",
+    "distribution" => node["lsb"]["codename"],
+    "components"   => ["nginx"],
+    "keyserver"    => nil,
+    "key"          => "http://nginx.org/keys/nginx_signing.key",
+    "deb_src"      => false
+  },
+
+  "ppa" => {
+    "uri"          => "http://ppa.launchpad.net/nginx/stable/ubuntu",
+    "distribution" => node["lsb"]["codename"],
+    "components"   => ["main"],
+    "keyserver"    => "keyserver.ubuntu.com",
+    "key"          => "C300EE8C",
+    "deb_src"      => true,
+  },
+
+  "phusion" => {
+    "uri"          => "https://oss-binaries.phusionpassenger.com/apt/passenger",
+    "distribution" => node["lsb"]["codename"],
+    "components"   => ["main"],
+    "keyserver"    => "keyserver.ubuntu.com",
+    "key"          => "561F9B9CAC40B2F7",
+    "deb_src"      => true
+  }
+}
