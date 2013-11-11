@@ -205,3 +205,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * Freely distributable and licensed under the [MIT license](http://phlipper.mit-license.org/2013/license.html).
 * Copyright (c) 2013 Phil Cohen (github@phlippers.net) [![endorse](http://api.coderwall.com/phlipper/endorsecount.png)](http://coderwall.com/phlipper)
 * http://phlippers.net/
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/phlipper/chef-nginx/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
