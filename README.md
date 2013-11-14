@@ -194,6 +194,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add attribute for nginx status port
     * add attribute for nginx version
     * add option to use PPA repository instead of official nginx repository
+    * make sure log directory exists
 * **[@0rca](https://github.com/0rca)**
     * add `skip_default_site` attribute
 
