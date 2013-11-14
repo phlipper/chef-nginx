@@ -13,6 +13,12 @@ cookbook_file "/etc/nginx/mime.types" do
   notifies :restart, "service[nginx]", :delayed
 end
 
+directory node["nginx"]["log_dir"] do
+  owner "root"
+  group "root"
+  recursive true
+end
+
 template "nginx.conf" do
   path "#{node["nginx"]["dir"]}/nginx.conf"
   source "nginx.conf.erb"
