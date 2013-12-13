@@ -5,7 +5,7 @@
 # Copyright 2013, Phil Cohen <github@phlippers.net>
 
 
-cookbook_file "/etc/nginx/mime.types" do
+cookbook_file "#{node["nginx"]["dir"]}/mime.types" do
   source "mime.types"
   owner "root"
   group "root"
