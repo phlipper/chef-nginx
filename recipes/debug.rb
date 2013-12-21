@@ -2,7 +2,6 @@
 # Cookbook Name:: nginx
 # Recipe:: debug
 #
-# Copyright 2013, Phil Cohen <github@phlippers.net>
 
 include_recipe "nginx"
 

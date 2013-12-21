@@ -2,7 +2,6 @@
 # Cookbook Name:: nginx
 # Recipe:: service
 #
-# Copyright 2013, Phil Cohen <github@phlippers.net>
 
 
 service "nginx" do

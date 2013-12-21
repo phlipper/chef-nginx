@@ -2,7 +2,6 @@
 # Cookbook Name:: nginx
 # Recipe:: configuration
 #
-# Copyright 2013, Phil Cohen <github@phlippers.net>
 
 
 cookbook_file "#{node["nginx"]["dir"]}/mime.types" do
