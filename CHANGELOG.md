@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of nginx.
 
-## 0.5.5 (2013-11-14)
+## 0.5.5 (2013-12-21)
 
 * Fix `mime.types` file location
 * README updates
