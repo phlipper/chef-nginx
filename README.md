@@ -1,4 +1,4 @@
-# chef-nginx [![Build Status](https://travis-ci.org/phlipper/chef-nginx.png?branch=master)](https://travis-ci.org/phlipper/chef-nginx)
+# chef-nginx [![Build Status](http://img.shields.io/travis-ci/phlipper/chef-nginx.png)](https://travis-ci.org/phlipper/chef-nginx)
 
 ## Description
 
@@ -27,8 +27,8 @@ It is recommended to use a version of Chef `>= 10.16.4` as that is the target of
 
 This cookbook requires Ruby 1.9+ and is tested against:
 
-* 1.9.2
 * 1.9.3
+* 2.0.0
 
 
 ## Recipes
