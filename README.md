@@ -195,6 +195,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add attribute for nginx version
     * add option to use PPA repository instead of official nginx repository
     * make sure log directory exists
+    * use correct path for `mime.types` file
 * **[@0rca](https://github.com/0rca)**
     * add `skip_default_site` attribute
 
