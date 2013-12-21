@@ -27,15 +27,18 @@
         </ul>
       </header>
       <section>
-        <p><a href="https://travis-ci.org/phlipper/chef-nginx"><img src="https://travis-ci.org/phlipper/chef-nginx.png?branch=master" alt="Build Status"></a></p>
+        <p><a href="https://travis-ci.org/phlipper/chef-nginx"><img src="http://img.shields.io/travis-ci/phlipper/chef-nginx.png" alt="Build Status"></a></p>
 
-<h2>Description</h2>
+<h2>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
 
 <p>Installs the <a href="http://nginx.org">Nginx</a> web server.</p>
 
-<h2>Requirements</h2>
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
-<h3>Supported Platforms</h3>
+<h3>
+<a name="supported-platforms" class="anchor" href="#supported-platforms"><span class="octicon octicon-link"></span></a>Supported Platforms</h3>
 
 <p>The following platforms are supported by this cookbook, meaning that the
 recipes should run on these platforms without error:</p>
@@ -43,23 +46,27 @@ recipes should run on these platforms without error:</p>
 <ul>
 <li>Ubuntu</li>
 <li>Debian</li>
-</ul><h3>Cookbooks</h3>
+</ul><h3>
+<a name="cookbooks" class="anchor" href="#cookbooks"><span class="octicon octicon-link"></span></a>Cookbooks</h3>
 
 <ul>
 <li>
 <a href="http://community.opscode.com/cookbooks/apt">apt</a> Opscode LWRP Cookbook</li>
-</ul><h3>Chef</h3>
+</ul><h3>
+<a name="chef" class="anchor" href="#chef"><span class="octicon octicon-link"></span></a>Chef</h3>
 
 <p>It is recommended to use a version of Chef <code>&gt;= 10.16.4</code> as that is the target of my usage and testing, though this should work with most recent versions.</p>
 
-<h3>Ruby</h3>
+<h3>
+<a name="ruby" class="anchor" href="#ruby"><span class="octicon octicon-link"></span></a>Ruby</h3>
 
 <p>This cookbook requires Ruby 1.9+ and is tested against:</p>
 
 <ul>
-<li>1.9.2</li>
 <li>1.9.3</li>
-</ul><h2>Recipes</h2>
+<li>2.0.0</li>
+</ul><h2>
+<a name="recipes" class="anchor" href="#recipes"><span class="octicon octicon-link"></span></a>Recipes</h2>
 
 <ul>
 <li>
@@ -72,17 +79,21 @@ recipes should run on these platforms without error:</p>
 <code>nginx::server</code> - Install and configure the <code>nginx</code> package.</li>
 <li>
 <code>nginx::debug</code> - Install and configure the <code>nginx-debug</code> package.</li>
-</ul><h2>Usage</h2>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.</p>
 
-<h2>Attributes</h2>
+<h2>
+<a name="attributes" class="anchor" href="#attributes"><span class="octicon octicon-link"></span></a>Attributes</h2>
 
-<div class="highlight"><pre><span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"dir"</span><span class="o">]</span>      <span class="o">=</span> <span class="s2">"/etc/nginx"</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"log_dir"</span><span class="o">]</span>  <span class="o">=</span> <span class="s2">"/var/log/nginx"</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"user"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"www-data"</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"binary"</span><span class="o">]</span>   <span class="o">=</span> <span class="s2">"/usr/sbin/nginx"</span>
-<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"pid_file"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"/var/run/nginx.pid"</span>
+<div class="highlight highlight-ruby"><pre><span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"dir"</span><span class="o">]</span>        <span class="o">=</span> <span class="s2">"/etc/nginx"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"log_dir"</span><span class="o">]</span>    <span class="o">=</span> <span class="s2">"/var/log/nginx"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"user"</span><span class="o">]</span>       <span class="o">=</span> <span class="s2">"www-data"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"binary"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"/usr/sbin/nginx"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"pid_file"</span><span class="o">]</span>   <span class="o">=</span> <span class="s2">"/var/run/nginx.pid"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"version"</span><span class="o">]</span>    <span class="o">=</span> <span class="kp">nil</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"package_name"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"nginx"</span>  <span class="c1"># nginx[-light|full|extras]</span>
 
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"log_format"</span><span class="o">]</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">FORMAT</span>
 <span class="sh">  '$remote_addr $host $remote_user [$time_local] "$request" '</span>
@@ -157,9 +168,42 @@ recipes should run on these platforms without error:</p>
 
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"enable_stub_status"</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"status_port"</span><span class="o">]</span>        <span class="o">=</span> <span class="mi">80</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"skip_default_site"</span><span class="o">]</span>  <span class="o">=</span> <span class="kp">false</span>
+
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"repository"</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"official"</span>
+<span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"repository_sources"</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"official"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="s2">"uri"</span>          <span class="o">=&gt;</span> <span class="s2">"http://nginx.org/packages/</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s2">"platform"</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"distribution"</span> <span class="o">=&gt;</span> <span class="n">node</span><span class="o">[</span><span class="s2">"lsb"</span><span class="o">][</span><span class="s2">"codename"</span><span class="o">]</span><span class="p">,</span>
+    <span class="s2">"components"</span>   <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">"nginx"</span><span class="o">]</span><span class="p">,</span>
+    <span class="s2">"keyserver"</span>    <span class="o">=&gt;</span> <span class="kp">nil</span><span class="p">,</span>
+    <span class="s2">"key"</span>          <span class="o">=&gt;</span> <span class="s2">"http://nginx.org/keys/nginx_signing.key"</span><span class="p">,</span>
+    <span class="s2">"deb_src"</span>      <span class="o">=&gt;</span> <span class="kp">false</span>
+  <span class="p">},</span>
+
+  <span class="s2">"ppa"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="s2">"uri"</span>          <span class="o">=&gt;</span> <span class="s2">"http://ppa.launchpad.net/nginx/stable/ubuntu"</span><span class="p">,</span>
+    <span class="s2">"distribution"</span> <span class="o">=&gt;</span> <span class="n">node</span><span class="o">[</span><span class="s2">"lsb"</span><span class="o">][</span><span class="s2">"codename"</span><span class="o">]</span><span class="p">,</span>
+    <span class="s2">"components"</span>   <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">"main"</span><span class="o">]</span><span class="p">,</span>
+    <span class="s2">"keyserver"</span>    <span class="o">=&gt;</span> <span class="s2">"keyserver.ubuntu.com"</span><span class="p">,</span>
+    <span class="s2">"key"</span>          <span class="o">=&gt;</span> <span class="s2">"C300EE8C"</span><span class="p">,</span>
+    <span class="s2">"deb_src"</span>      <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+  <span class="p">},</span>
+
+  <span class="s2">"phusion"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="s2">"uri"</span>          <span class="o">=&gt;</span> <span class="s2">"https://oss-binaries.phusionpassenger.com/apt/passenger"</span><span class="p">,</span>
+    <span class="s2">"distribution"</span> <span class="o">=&gt;</span> <span class="n">node</span><span class="o">[</span><span class="s2">"lsb"</span><span class="o">][</span><span class="s2">"codename"</span><span class="o">]</span><span class="p">,</span>
+    <span class="s2">"components"</span>   <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">"main"</span><span class="o">]</span><span class="p">,</span>
+    <span class="s2">"keyserver"</span>    <span class="o">=&gt;</span> <span class="s2">"keyserver.ubuntu.com"</span><span class="p">,</span>
+    <span class="s2">"key"</span>          <span class="o">=&gt;</span> <span class="s2">"561F9B9CAC40B2F7"</span><span class="p">,</span>
+    <span class="s2">"deb_src"</span>      <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
-<h2>TODO</h2>
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
 
 <p>Including, but not limited to ...</p>
 
@@ -168,7 +212,8 @@ recipes should run on these platforms without error:</p>
 <li>Support additonal build configurations</li>
 <li>Support additonal configuration file attributes</li>
 <li>Provider for creating virtual hosts</li>
-</ul><h2>Contributing</h2>
+</ul><h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <ol>
 <li>Fork it</li>
@@ -176,7 +221,8 @@ recipes should run on these platforms without error:</p>
 <li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create new Pull Request</li>
-</ol><h2>Contributors</h2>
+</ol><h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
 
 <p>Many thanks go to the following <a href="https://github.com/phlipper/chef-nginx/graphs/contributors">contributors</a> who have helped to make this cookbook even better:</p>
 
@@ -194,18 +240,30 @@ recipes should run on these platforms without error:</p>
 
 <ul>
 <li>add attribute for nginx status port</li>
+<li>add attribute for nginx version</li>
+<li>add option to use PPA repository instead of official nginx repository</li>
+<li>make sure log directory exists</li>
+<li>use correct path for <code>mime.types</code> file</li>
 </ul>
 </li>
-</ul><h2>License</h2>
+<li>
+<strong><a href="https://github.com/0rca">@0rca</a></strong>
+
+<ul>
+<li>add <code>skip_default_site</code> attribute</li>
+</ul>
+</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p><strong>chef-nginx</strong></p>
 
 <ul>
-<li>Freely distributable and licensed under the <a href="http://phlipper.mit-license.org/2013/license.html">MIT license</a>.</li>
-<li>Copyright (c) 2013 Phil Cohen (<a href="mailto:github@phlippers.net">github@phlippers.net</a>) <a href="http://coderwall.com/phlipper"><img src="http://api.coderwall.com/phlipper/endorsecount.png" alt="endorse"></a>
+<li>Freely distributable and licensed under the <a href="http://phlipper.mit-license.org/2012-2014/license.html">MIT license</a>.</li>
+<li>Copyright (c) 2012-2014 Phil Cohen (<a href="mailto:github@phlippers.net">github@phlippers.net</a>) <a href="http://coderwall.com/phlipper"><img src="http://api.coderwall.com/phlipper/endorsecount.png" alt="endorse"></a> <a href="https://www.gittip.com/phlipper/"><img src="http://img.shields.io/gittip/phlipper.png" alt="Gittip"></a>
 </li>
 <li><a href="http://phlippers.net/">http://phlippers.net/</a></li>
-</ul>
+</ul><p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/phlipper/chef-nginx/trend.png" alt="Bitdeli Badge"></a></p>
       </section>
     </div>
     <footer>
