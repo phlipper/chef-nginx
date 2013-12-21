@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of nginx.
 
+## 0.5.5 (2013-11-14)
+
+* Fix `mime.types` file location
+* README updates
+* CI updates - only tested against 1.9.3 and 2.0.0 now
+
 ## 0.5.4 (2013-11-14)
 
 * Add `phusion` repository source option
