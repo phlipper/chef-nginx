@@ -2,7 +2,6 @@
 # Cookbook Name:: nginx
 # Recipe:: default
 #
-# Copyright 2013, Phil Cohen <github@phlippers.net>
 
 
 repo = node["nginx"]["repository_sources"].fetch(node["nginx"]["repository"])
