@@ -6,3 +6,11 @@ vendor/bundle
 build/*
 tmp/
 Gemfile.lock
+Berksfile.lock
+
+.kitchen/
+.vagrant/
+.vagrant.d/
+
+Thorfile
+Vagrantfile
