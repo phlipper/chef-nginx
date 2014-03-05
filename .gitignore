@@ -6,3 +6,8 @@ vendor/bundle
 build/*
 tmp/
 *.lock
+.kitchen/
+.vagrant/
+.vagrant.d/
+Thorfile
+Vagrantfile
