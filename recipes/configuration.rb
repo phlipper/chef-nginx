@@ -3,13 +3,12 @@
 # Recipe:: configuration
 #
 
-
 cookbook_file "#{node["nginx"]["dir"]}/mime.types" do
   source "mime.types"
   owner "root"
   group "root"
   mode  "0644"
-  notifies :restart, "service[nginx]", :delayed
+  notifies :restart, "service[nginx]"
 end
 
 directory node["nginx"]["log_dir"] do
@@ -24,7 +23,7 @@ template "nginx.conf" do
   owner "root"
   group "root"
   mode  "0644"
-  notifies :restart, "service[nginx]", :delayed
+  notifies :restart, "service[nginx]"
 end
 
 %w[sites-available sites-enabled].each do |vhost_dir|
@@ -44,14 +43,14 @@ template "#{node["nginx"]["dir"]}/sites-available/default" do
   not_if { node["nginx"]["skip_default_site"] }
 end
 
-for config_file in node["nginx"]["conf_files"]
+node["nginx"]["conf_files"].each do |config_file|
   template config_file do
     path "#{node["nginx"]["dir"]}/conf.d/#{config_file}.conf"
     source "#{config_file}.conf.erb"
     owner "root"
     group "root"
     mode  "0644"
-    notifies :restart, "service[nginx]", :delayed
+    notifies :restart, "service[nginx]"
   end
 end
 
@@ -60,7 +59,7 @@ template "#{node["nginx"]["dir"]}/conf.d/nginx_status.conf" do
   owner "root"
   group "root"
   mode "0644"
-  notifies :restart, "service[nginx]", :delayed
-  variables( :port => node["nginx"]["status_port"] )
+  notifies :restart, "service[nginx]"
+  variables(port: node["nginx"]["status_port"])
   only_if { node["nginx"]["enable_stub_status"] }
 end

@@ -3,7 +3,6 @@
 # Recipe:: default
 #
 
-
 repo = node["nginx"]["repository_sources"].fetch(node["nginx"]["repository"])
 
 apt_repository "nginx" do
