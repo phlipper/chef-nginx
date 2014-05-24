@@ -199,6 +199,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * use correct path for `mime.types` file
 * **[@0rca](https://github.com/0rca)**
     * add `skip_default_site` attribute
+* **[@RichardWigley](https://github.com/RichardWigley)**
+    * add initial `test-kitchen` support
 
 
 ## License
