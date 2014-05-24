@@ -108,7 +108,7 @@ default["nginx"]["repository_sources"] = {
     "components"   => ["main"],
     "keyserver"    => "keyserver.ubuntu.com",
     "key"          => "C300EE8C",
-    "deb_src"      => true,
+    "deb_src"      => true
   },
 
   "phusion" => {
