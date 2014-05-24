@@ -1,0 +1,20 @@
+---
+driver:
+  require_chef_omnibus: <%= ENV.fetch("CHEF_VERSION", "latest") %>
+  ssh_key: <%= File.expand_path("./test/support/keys/vagrant") %>
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-12.04
+  - name: ubuntu-14.04
+  - name: debian-6.0.8
+  - name: debian-7.4
+
+suites:
+  - name: server
+    run_list:
+      - recipe[nginx::server]
+    attributes:

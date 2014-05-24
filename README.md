@@ -29,6 +29,7 @@ This cookbook requires Ruby 1.9+ and is tested against:
 
 * 1.9.3
 * 2.0.0
+* 2.1.2
 
 
 ## Recipes
@@ -198,6 +199,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * use correct path for `mime.types` file
 * **[@0rca](https://github.com/0rca)**
     * add `skip_default_site` attribute
+* **[@RichardWigley](https://github.com/RichardWigley)**
+    * add initial `test-kitchen` support
 
 
 ## License
@@ -207,5 +210,3 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * Freely distributable and licensed under the [MIT license](http://phlipper.mit-license.org/2012-2014/license.html).
 * Copyright (c) 2012-2014 Phil Cohen (github@phlippers.net) [![endorse](http://api.coderwall.com/phlipper/endorsecount.png)](http://coderwall.com/phlipper) [![Gittip](http://img.shields.io/gittip/phlipper.png)](https://www.gittip.com/phlipper/)
 * http://phlippers.net/
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/phlipper/chef-nginx/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
