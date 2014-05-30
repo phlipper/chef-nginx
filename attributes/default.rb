@@ -10,6 +10,7 @@
 default["nginx"]["dir"]        = "/etc/nginx"
 default["nginx"]["log_dir"]    = "/var/log/nginx"
 default["nginx"]["user"]       = "www-data"
+default['nginx']['bin_dir']    = '/usr/sbin'
 default["nginx"]["binary"]     = "/usr/sbin/nginx"
 default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
 default["nginx"]["version"]    = nil
