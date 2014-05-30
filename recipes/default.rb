@@ -23,7 +23,7 @@ template "#{node['nginx']['bin_dir']}/nxensite" do
   not_if { ::File.exists?("#{node['nginx']['bin_dir']}/nxensite") }
 end
 
-execute "nxensite #{new_resource.name}" do
+execute "Link #{node['nginx']['bin_dir']}/nxdissite" do
   command "ln -s #{node['nginx']['bin_dir']}/nxensite #{node['nginx']['bin_dir']}/nxdissite"
   only_if { ::File.exists?("#{node['nginx']['bin_dir']}/nxensite") }
   not_if { ::File.symlink?("#{node['nginx']['bin_dir']}/nxdissite") }
