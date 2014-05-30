@@ -45,7 +45,7 @@ This cookbook requires Ruby 1.9+ and is tested against:
 
 This cookbook provides one resource with a corresponding provider
 
-**site.rb**
+# site.rb
 Manage virtual hosts - create, delete, enable and disable virtual host configurations
 
 Actions:
@@ -73,7 +73,7 @@ Attribute Parameters (only used with the `create` action):
 This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.
 It also installs a nxensite and nxdissite script for enabling and disabling sites and provides a provider for creating and enabling/disabling nginx-sites.
 
-**nginx_site**
+# nginx_site
 
 Create a nginx virtual host configuration file in the sites-available folder
 
