@@ -33,6 +33,7 @@ action :delete do
   file "#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}" do
     only_if { ::File.symlink?("#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}") }
     action :delete
+    notifies :reload, "service[nginx]"
   end
 end
 
@@ -40,7 +41,7 @@ action :enable do
   execute "nxensite #{new_resource.name}" do
     command "#{node['nginx']['bin_dir']}/nxensite #{new_resource.name}"
     not_if { ::File.symlink?("#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}") }
-    notifies :restart, "service[nginx]"
+    notifies :reload, "service[nginx]"
     new_resource.updated_by_last_action(true)
   end
 end
@@ -49,7 +50,7 @@ action :disable do
   execute "nxdissite #{new_resource.name}" do
     command "#{node['nginx']['bin_dir']}/nxdissite #{new_resource.name}"
     only_if { ::File.symlink?("#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}") }
-    notifies :restart, "service[nginx]"
+    notifies :reload, "service[nginx]"
     new_resource.updated_by_last_action(true)
   end
 end
