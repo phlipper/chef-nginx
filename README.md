@@ -41,10 +41,71 @@ This cookbook requires Ruby 1.9+ and is tested against:
 * `nginx::debug` - Install and configure the `nginx-debug` package.
 
 
+## Resources and Providers
+
+This cookbook provides one resource with a corresponding provider
+
+### site.rb
+Manage virtual hosts - create, delete, enable and disable virtual host configurations
+
+Actions:
+
+* `create` - Create a virtual host configuration file.
+* `delete` - Delete a virtual host configuration file.
+* `enable` - Enable a virtual host configuration file.
+* `disable` - Disable a virtual host configuration file.
+
+Attribute Parameters (only used with the `create` action):
+
+* `listen` - the ip address and/or port to [listen](http://nginx.org/en/docs/http/ngx_http_core_module.html#listen) to, defaults to '80'
+* `host` - [server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name) for the virtualhost, defaults to 'localhost'
+* `root` - the path to the site [root](http://nginx.org/en/docs/http/ngx_http_core_module.html#root) folder, defaults to '/var/www'
+* `index` - the [index](http://nginx.org/en/docs/http/ngx_http_index_module.html) files, in order of use, defaults to 'index.html index.htm'
+* `charset` - the default [charset](http://nginx.org/en/docs/http/ngx_http_charset_module.html), defaults to 'utf-8'
+* `customconfig` - supply your own custom configuration code - check out the [nginx docs](http://wiki.nginx.org/Configuration), defaults to nil
+* `location` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
+* `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
+* `accesslog` - enable or disable the access log, defaults to true
+
+
 ## Usage
 
 This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.
-It also installs a nxensite and nxdissite script for enabling and disabling sites.
+It also installs a nxensite and nxdissite script for enabling and disabling sites and provides a provider for creating and enabling/disabling nginx-sites.
+
+### nginx_site
+
+Create a nginx virtual host configuration file in the sites-available folder
+
+```ruby
+nginx_site 'example.com' do
+  host 'example.com www.example.com'
+  root '/var/www/example.com'
+end
+```
+
+This would create a configuration file for example.com and www.example.com that points to `/var/www/example.com`
+
+```ruby
+nginx_site 'example.com' do
+  host 'example.com www.example.com'
+  root '/var/www/example.com'
+  index 'index.php index.html index.htm'
+  customconfig 'error_page 404 /index.php;'
+  phpfpm true
+  action [:create, :enable]
+end
+```
+
+This would create a php-fpm enabled virtual host (provided you have php-fpm installed) with a custom configuration for handling missing (404) pages and enable it
+
+```ruby
+nginx_site 'example.com' do
+  action :enable
+end
+```
+
+This would enable a previously created site named 'example.com'
 
 
 ## Attributes
@@ -174,7 +235,6 @@ Including, but not limited to ...
 * Fully support all of the standard Chef-supported distributions
 * Support additonal build configurations
 * Support additonal configuration file attributes
-* Provider for creating virtual hosts
 
 
 ## Contributing
@@ -203,7 +263,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add `skip_default_site` attribute
 * **[@RichardWigley](https://github.com/RichardWigley)**
     * add initial `test-kitchen` support
-
+* **[@arvidbjorkstrom](https://github.com/arvidbjorkstrom)**
+    * Provider for creating/deleting hosts configurations, enabling and disabling them
 
 ## License
 

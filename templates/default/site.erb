@@ -1,0 +1,49 @@
+server {
+  listen <%= @listen %>;
+  server_name <%= @host %>;
+  root <%= @root %>;
+
+  index <%= @index %>;
+
+  charset <%= @charset %>;
+
+  # removes trailing slashes (prevents SEO duplicate content issues)
+  if (!-d $request_filename)
+  {
+    rewrite ^/(.+)/$ /$1 permanent;
+  }
+
+  <% if @customconfig -%>
+    <%= @customconfig %>
+  <% end -%>
+
+  <% if @location -%>
+  location / {
+    <%= @location %>;
+  }
+  <% end -%>
+
+  <% if @phpfpm -%>
+  location ~ \.php$ {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_index index.php;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $request_filename;
+    fastcgi_param ENV <% node.chef_environment -%>;
+  }
+  <% end -%>
+
+  # Deny access to .htaccess & .htpasswd files
+  location ~ /\.ht {
+      deny all;
+  }
+
+  <% if @accesslog -%>
+  access_log <%= node["nginx"]["log_dir"] %>/<%= @host %>.access.log;
+  <% else -%>
+  access_log off;
+  <% end -%>
+  error_log  <%= node["nginx"]["log_dir"] %>/<%= @host %>-error.log error;
+}
