@@ -44,6 +44,7 @@ This cookbook requires Ruby 1.9+ and is tested against:
 ## Usage
 
 This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.
+It also installs a nxensite and nxdissite script for enabling and disabling sites.
 
 
 ## Attributes
@@ -52,6 +53,7 @@ This cookbook installs the Nginx components if not present, and pulls updates if
 default["nginx"]["dir"]        = "/etc/nginx"
 default["nginx"]["log_dir"]    = "/var/log/nginx"
 default["nginx"]["user"]       = "www-data"
+default['nginx']['bin_dir']    = '/usr/sbin'
 default["nginx"]["binary"]     = "/usr/sbin/nginx"
 default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
 default["nginx"]["version"]    = nil
