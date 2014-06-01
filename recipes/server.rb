@@ -11,3 +11,4 @@ end
 
 include_recipe "nginx::configuration"
 include_recipe "nginx::service"
+include_recipe "nginx::enabledisablesite"

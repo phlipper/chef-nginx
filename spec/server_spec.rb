@@ -11,6 +11,7 @@ describe "nginx::server" do
 
   it { expect(chef_run).to include_recipe("nginx::configuration") }
   it { expect(chef_run).to include_recipe("nginx::service") }
+  it { expect(chef_run).to include_recipe("nginx::enabledisablesite") }
 
   context "with a specific `package_name` and `version`" do
     let(:chef_run) do
