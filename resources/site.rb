@@ -23,3 +23,4 @@ attribute :customconfig, :kind_of => String, :default => nil
 attribute :location, :kind_of => String, :default => 'try_files $uri $uri/'
 attribute :phpfpm, :kind_of => [ TrueClass, FalseClass ], :default => false
 attribute :accesslog, :kind_of => [ TrueClass, FalseClass ], :default => true
+attr_accessor :exists
