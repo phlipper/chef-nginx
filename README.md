@@ -91,13 +91,13 @@ nginx_site 'example.com' do
   host 'example.com www.example.com'
   root '/var/www/example.com'
   index 'index.php index.html index.htm'
-  customconfig 'error_page 404 /index.php;'
+  slashlocation 'try_files $uri $uri/ /index.php?$query_string'
   phpfpm true
   action [:create, :enable]
 end
 ```
 
-This would create a php-fpm enabled virtual host (provided you have php-fpm installed) with a custom configuration for handling missing (404) pages and enable it
+This would create a php-fpm enabled virtual host (provided you have php-fpm installed) with a default rewrite to index.php and enable it
 
 ```ruby
 nginx_site 'example.com' do
