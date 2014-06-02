@@ -138,4 +138,15 @@ describe "nginx::enabledisablesite" do
   it "created the `nxdissite` script" do
     expect(nxdissite_script).to be_linked_to "/usr/sbin/nxensite"
   end
+
+  let(:nxendissite_completion) do
+    file "/etc/bash_completion.d/nxendissite"
+  end
+
+  it "created the `nxendissite` bash completion script" do
+    expect(nxendissite_completion).to be_file
+    expect(nxendissite_completion).to be_owned_by "root"
+    expect(nxendissite_completion).to be_grouped_into "root"
+    expect(nxendissite_completion).to be_mode "644"
+  end
 end

@@ -16,3 +16,11 @@ execute "Link #{node['nginx']['bin_dir']}/nxdissite" do
   only_if { ::File.exists?("#{node['nginx']['bin_dir']}/nxensite") }
   not_if { ::File.symlink?("#{node['nginx']['bin_dir']}/nxdissite") }
 end
+
+template "/etc/bash_completion.d/nxendissite" do
+  source "nxendissite_completion.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+  not_if { ::File.exists?("/etc/bash_completion.d/nxendissite") }
+end
