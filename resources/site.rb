@@ -19,8 +19,10 @@ attribute :host, :kind_of => String, :default => 'localhost'
 attribute :root, :kind_of => String, :default => '/var/www'
 attribute :index, :kind_of => String, :default => 'index.html index.htm'
 attribute :charset, :kind_of => String, :default => 'utf-8'
-attribute :customconfig, :kind_of => String, :default => nil
 attribute :slashlocation, :kind_of => String, :default => 'try_files $uri $uri/'
 attribute :phpfpm, :kind_of => [ TrueClass, FalseClass ], :default => false
 attribute :accesslog, :kind_of => [ TrueClass, FalseClass ], :default => true
+attribute :templatecookbook, :kind_of => String, :default => 'nginx'
+attribute :templatesource, :kind_of => String, :default => 'site.erb'
+
 attr_accessor :exists
