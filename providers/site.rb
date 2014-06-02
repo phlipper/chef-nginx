@@ -24,7 +24,6 @@ action :create do
           :host => new_resource.host,
           :root => new_resource.root,
           :index => new_resource.index,
-          :charset => new_resource.charset,
           :slashlocation => new_resource.slashlocation,
           :phpfpm => new_resource.phpfpm,
           :accesslog => new_resource.accesslog,

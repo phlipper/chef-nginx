@@ -18,7 +18,6 @@ attribute :listen, :kind_of => String, :default => '80'
 attribute :host, :kind_of => String, :default => 'localhost'
 attribute :root, :kind_of => String, :default => '/var/www'
 attribute :index, :kind_of => String, :default => 'index.html index.htm'
-attribute :charset, :kind_of => String, :default => 'utf-8'
 attribute :slashlocation, :kind_of => String, :default => 'try_files $uri $uri/'
 attribute :phpfpm, :kind_of => [ TrueClass, FalseClass ], :default => false
 attribute :accesslog, :kind_of => [ TrueClass, FalseClass ], :default => true
