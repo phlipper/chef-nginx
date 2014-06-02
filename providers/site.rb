@@ -37,14 +37,12 @@ end
 action :delete do
   if @current_resource.exists
     converge_by("Disable and remove configuration file for #{@new_resource}") do
+      nginx_site new_resource.name do
+        action :disable
+      end
       file "#{node['nginx']['dir']}/sites-available/#{new_resource.name}" do
         only_if { ::File.exists?("#{node['nginx']['dir']}/sites-available/#{new_resource.name}") }
         action :delete
-      end
-      file "#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}" do
-        only_if { ::File.symlink?("#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}") }
-        action :delete
-        notifies :reload, "service[nginx]"
       end
     end
   else
