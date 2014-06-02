@@ -88,6 +88,14 @@ This would create a configuration file for example.com and www.example.com that 
 
 ```ruby
 nginx_site 'example.com' do
+  action :enable
+end
+```
+
+This would enable a previously created site named 'example.com'
+
+```ruby
+nginx_site 'example.com' do
   host 'example.com www.example.com'
   root '/var/www/example.com'
   index 'index.php index.html index.htm'
@@ -98,14 +106,6 @@ end
 ```
 
 This would create a php-fpm enabled virtual host (provided you have php-fpm installed) with a default rewrite to index.php and enable it
-
-```ruby
-nginx_site 'example.com' do
-  action :enable
-end
-```
-
-This would enable a previously created site named 'example.com'
 
 
 ## Attributes
