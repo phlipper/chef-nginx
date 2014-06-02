@@ -118,3 +118,24 @@ describe "nginx::service" do
     expect(port 80).to be_listening
   end
 end
+
+describe "nginx::enabledisablesite" do
+  let(:nxensite_script) do
+    file "/usr/sbin/nxensite"
+  end
+
+  it "created the `nxensite` script" do
+    expect(nxensite_script).to be_file
+    expect(nxensite_script).to be_owned_by "root"
+    expect(nxensite_script).to be_grouped_into "root"
+    expect(nxensite_script).to be_mode "755"
+  end
+
+  let(:nxdissite_script) do
+    file "/usr/sbin/nxdissite"
+  end
+
+  it "created the `nxdissite` script" do
+    expect(nxdissite_script).to be_linked_to "/usr/sbin/nxensite"
+  end
+end
