@@ -63,7 +63,7 @@ Attribute Parameters (only used with the `create` action):
 * `index` - the [index](http://nginx.org/en/docs/http/ngx_http_index_module.html) files, in order of use, defaults to 'index.html index.htm'
 * `charset` - the default [charset](http://nginx.org/en/docs/http/ngx_http_charset_module.html), defaults to 'utf-8'
 * `customconfig` - supply your own custom configuration code - check out the [nginx docs](http://wiki.nginx.org/Configuration), defaults to nil
-* `location` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
+* `slashlocation` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
 * `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
 * `accesslog` - enable or disable the access log, defaults to true
 

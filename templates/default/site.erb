@@ -17,11 +17,9 @@ server {
     <%= @customconfig %>
   <% end -%>
 
-  <% if @location -%>
   location / {
-    <%= @location %>;
+    <%= @slashlocation %>;
   }
-  <% end -%>
 
   <% if @phpfpm -%>
   location ~ \.php$ {
