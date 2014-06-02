@@ -13,7 +13,8 @@ action :create do
   else
     converge_by("Create configuration file for #{@new_resource}") do
       template "#{node['nginx']['dir']}/sites-available/#{new_resource.name}" do
-        source "site.erb"
+        source new_resource.templatesource
+        cookbook new_resource.templatecookbook
         owner "root"
         group "root"
         mode "0644"
@@ -24,7 +25,6 @@ action :create do
           :root => new_resource.root,
           :index => new_resource.index,
           :charset => new_resource.charset,
-          :customconfig => new_resource.customconfig,
           :slashlocation => new_resource.slashlocation,
           :phpfpm => new_resource.phpfpm,
           :accesslog => new_resource.accesslog,

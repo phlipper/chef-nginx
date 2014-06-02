@@ -13,10 +13,6 @@ server {
     rewrite ^/(.+)/$ /$1 permanent;
   }
 
-  <% if @customconfig -%>
-    <%= @customconfig %>
-  <% end -%>
-
   location / {
     <%= @slashlocation %>;
   }

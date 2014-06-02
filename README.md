@@ -62,10 +62,11 @@ Attribute Parameters (only used with the `create` action):
 * `root` - the path to the site [root](http://nginx.org/en/docs/http/ngx_http_core_module.html#root) folder, defaults to '/var/www'
 * `index` - the [index](http://nginx.org/en/docs/http/ngx_http_index_module.html) files, in order of use, defaults to 'index.html index.htm'
 * `charset` - the default [charset](http://nginx.org/en/docs/http/ngx_http_charset_module.html), defaults to 'utf-8'
-* `customconfig` - supply your own custom configuration code - check out the [nginx docs](http://wiki.nginx.org/Configuration), defaults to nil
 * `slashlocation` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
 * `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
 * `accesslog` - enable or disable the access log, defaults to true
+* `templatecookbook` - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'
+* `templatesource` - override for the name of the template from the default 'site.erb'
 
 
 ## Usage
