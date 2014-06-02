@@ -17,7 +17,11 @@ server {
     fastcgi_index index.php;
     include fastcgi_params;
 
-    fastcgi_param ENV <% node.chef_environment -%>;
+    <% if node["chef_environment"] -%>
+    fastcgi_param ENV <%= node["chef_environment"] %>;
+    <% else -%>
+    fastcgi_param ENV local;
+    <% end -%>
 
     fastcgi_param  QUERY_STRING       $query_string;
     fastcgi_param  REQUEST_METHOD     $request_method;
