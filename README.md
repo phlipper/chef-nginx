@@ -61,7 +61,6 @@ Attribute Parameters (only used with the `create` action):
 * `host` - [server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name) for the virtualhost, defaults to 'localhost'
 * `root` - the path to the site [root](http://nginx.org/en/docs/http/ngx_http_core_module.html#root) folder, defaults to '/var/www'
 * `index` - the [index](http://nginx.org/en/docs/http/ngx_http_index_module.html) files, in order of use, defaults to 'index.html index.htm'
-* `charset` - the default [charset](http://nginx.org/en/docs/http/ngx_http_charset_module.html), defaults to 'utf-8'
 * `slashlocation` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
 * `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
 * `accesslog` - enable or disable the access log, defaults to true
