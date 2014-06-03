@@ -13,20 +13,20 @@ action :create do
   else
     converge_by("Create configuration file for #{@new_resource}") do
       template "#{node["nginx"]["dir"]}/sites-available/#{@new_resource.name}" do
-        source @new_resource.templatesource
-        cookbook @new_resource.templatecookbook
+        source new_resource.templatesource
+        cookbook new_resource.templatecookbook
         owner "root"
         group "root"
         mode "0644"
         variables(
-          name: @new_resource.name,
-          listen: @new_resource.listen,
-          host: @new_resource.host,
-          root: @new_resource.root,
-          index: @new_resource.index,
-          slashlocation: @new_resource.slashlocation,
-          phpfpm: @new_resource.phpfpm,
-          accesslog: @new_resource.accesslog
+          name: new_resource.name,
+          listen: new_resource.listen,
+          host: new_resource.host,
+          root: new_resource.root,
+          index: new_resource.index,
+          slashlocation: new_resource.slashlocation,
+          phpfpm: new_resource.phpfpm,
+          accesslog: new_resource.accesslog
         )
         not_if do
           ::File.exist?(
