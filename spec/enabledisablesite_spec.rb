@@ -22,14 +22,19 @@ describe "nginx::enabledisablesite" do
     ::File.stub(:exist?).with("/usr/sbin/nxensite").and_return(true)
     ::File.stub(:symlink?).with("/usr/sbin/nxdissite").and_return(false)
 
-    expect(chef_run).to run_execute("ln -s /usr/sbin/nxensite /usr/sbin/nxdissite")
+    expect(chef_run).to run_execute(
+      "ln -s /usr/sbin/nxensite \
+    /usr/sbin/nxdissite"
+    )
   end
 
   it "creates bash completion `nxendissite`" do
     ::File.stub(:exist?).with(anything).and_call_original
-    ::File.stub(:exist?).with("/etc/bash_completion.d/nxendissite").and_return(false)
+    ::File.stub(:exist?).with("/etc/bash_completion.d/nxendissite")
+      .and_return(false)
 
-    expect(chef_run).to create_template("/etc/bash_completion.d/nxendissite").with(
+    expect(chef_run).to create_template("/etc/bash_completion.d/nxendissite")
+    .with(
       source: "nxendissite_completion.erb",
       owner: "root",
       group: "root",

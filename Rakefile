@@ -19,7 +19,8 @@ end
 
 desc "Runs knife cookbook test"
 task knife: :prepare_sandbox do
-  sh "bundle exec knife cookbook test cookbook -c test/.chef/knife.rb -o #{sandbox_path}/../"
+  sh "bundle exec knife cookbook test cookbook -c \
+    test/.chef/knife.rb -o #{sandbox_path}/../"
 end
 
 desc "Runs specs with chefspec"

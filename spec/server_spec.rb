@@ -22,7 +22,8 @@ describe "nginx::server" do
     end
 
     it "installs the specified package and version" do
-      expect(chef_run).to install_package("nginx-chefspec").with_version("1.2.3")
+      expect(chef_run).to install_package("nginx-chefspec")
+        .with_version("1.2.3")
     end
   end
 end

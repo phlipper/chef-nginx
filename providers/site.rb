@@ -28,7 +28,11 @@ action :create do
           :phpfpm => new_resource.phpfpm,
           :accesslog => new_resource.accesslog
         })
-        not_if { ::File.exist?("#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}") }
+        not_if do
+          ::File.exist?(
+            "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}"
+          )
+        end
       end
     end
   end
@@ -41,7 +45,11 @@ action :delete do
         action :disable
       end
       file "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}" do
-        only_if { ::File.exist?("#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}") }
+        only_if do
+          ::File.exist?(
+            "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}"
+          )
+        end
         action :delete
       end
     end
@@ -51,10 +59,14 @@ action :delete do
 end
 
 action :enable do
-  converge_by("Enable configuration for #{new_resource} if not enabled and restart nginx") do
+  converge_by("Enable #{new_resource} configuration and restart nginx") do
     execute "nxensite #{new_resource.name}" do
       command "#{node["nginx"]["bin_dir"]}/nxensite #{new_resource.name}"
-      not_if { ::File.symlink?("#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}") }
+      not_if do
+        ::File.symlink?(
+          "#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}"
+        )
+      end
       notifies :reload, "service[nginx]"
       new_resource.updated_by_last_action(true)
     end
@@ -62,10 +74,14 @@ action :enable do
 end
 
 action :disable do
-  converge_by("Disable configuration for #{@new_resource} if enabled and restart nginx") do
+  converge_by("Disable #{new_resource} if enabled and restart nginx") do
     execute "nxdissite #{new_resource.name}" do
       command "#{node["nginx"]["bin_dir"]}/nxdissite #{new_resource.name}"
-      only_if { ::File.symlink?("#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}") }
+      only_if do
+        ::File.symlink?(
+          "#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}"
+        )
+      end
       notifies :reload, "service[nginx]"
       new_resource.updated_by_last_action(true)
     end
@@ -76,5 +92,7 @@ def load_current_resource
   @current_resource = Chef::Resource::NginxSite.new(@new_resource.name)
   @current_resource.name(@new_resource.name)
 
-  @current_resource.exists = ::File.exist?("#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}")
+  @current_resource.exists = ::File.exist?(
+    "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}"
+  )
 end
