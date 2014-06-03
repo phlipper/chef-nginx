@@ -1,6 +1,6 @@
 require "chefspec"
 require "chefspec/berkshelf"
-require_relative '../library/matchers'
+require_relative "../library/matchers"
 
 RSpec.configure do |config|
   # Specify the operating platform to mock Ohai data from (default: nil)

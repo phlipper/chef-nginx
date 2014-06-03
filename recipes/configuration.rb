@@ -35,7 +35,7 @@ end
   end
 end
 
-nginx_site 'default' do
+nginx_site "default" do
   host node["hostname"]
   root "/var/www/nginx-default"
   not_if { node["nginx"]["skip_default_site"] }

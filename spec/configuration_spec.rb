@@ -55,7 +55,7 @@ describe "nginx::configuration" do
     context "when `skip_default_site` is false" do
       let(:chef_run) do
         ChefSpec::Runner.new do |node|
-          node.automatic_attrs['hostname'] = "chefspechostname"
+          node.automatic_attrs["hostname"] = "chefspechostname"
         end.converge(described_recipe, "nginx::service")
       end
       it "creates the `default` template" do
