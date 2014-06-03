@@ -12,7 +12,7 @@ action :create do
     Chef::Log.info "#{ @new_resource } already exists - nothing to do."
   else
     converge_by("Create configuration file for #{@new_resource}") do
-      template "#{node['nginx']['dir']}/sites-available/#{new_resource.name}" do
+      template "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}" do
         source new_resource.templatesource
         cookbook new_resource.templatecookbook
         owner "root"
@@ -26,9 +26,9 @@ action :create do
           :index => new_resource.index,
           :slashlocation => new_resource.slashlocation,
           :phpfpm => new_resource.phpfpm,
-          :accesslog => new_resource.accesslog,
+          :accesslog => new_resource.accesslog
         })
-        not_if { ::File.exists?("#{node['nginx']['dir']}/sites-available/#{new_resource.name}")}
+        not_if { ::File.exist?("#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}") }
       end
     end
   end
@@ -40,8 +40,8 @@ action :delete do
       nginx_site new_resource.name do
         action :disable
       end
-      file "#{node['nginx']['dir']}/sites-available/#{new_resource.name}" do
-        only_if { ::File.exists?("#{node['nginx']['dir']}/sites-available/#{new_resource.name}") }
+      file "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}" do
+        only_if { ::File.exist?("#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}") }
         action :delete
       end
     end
@@ -53,8 +53,8 @@ end
 action :enable do
   converge_by("Enable configuration for #{new_resource} if not enabled and restart nginx") do
     execute "nxensite #{new_resource.name}" do
-      command "#{node['nginx']['bin_dir']}/nxensite #{new_resource.name}"
-      not_if { ::File.symlink?("#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}") }
+      command "#{node["nginx"]["bin_dir"]}/nxensite #{new_resource.name}"
+      not_if { ::File.symlink?("#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}") }
       notifies :reload, "service[nginx]"
       new_resource.updated_by_last_action(true)
     end
@@ -64,8 +64,8 @@ end
 action :disable do
   converge_by("Disable configuration for #{@new_resource} if enabled and restart nginx") do
     execute "nxdissite #{new_resource.name}" do
-      command "#{node['nginx']['bin_dir']}/nxdissite #{new_resource.name}"
-      only_if { ::File.symlink?("#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}") }
+      command "#{node["nginx"]["bin_dir"]}/nxdissite #{new_resource.name}"
+      only_if { ::File.symlink?("#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}") }
       notifies :reload, "service[nginx]"
       new_resource.updated_by_last_action(true)
     end
@@ -76,7 +76,5 @@ def load_current_resource
   @current_resource = Chef::Resource::NginxSite.new(@new_resource.name)
   @current_resource.name(@new_resource.name)
 
-  if ::File.exists?("#{node['nginx']['dir']}/sites-available/#{new_resource.name}")
-    @current_resource.exists = true
-  end
+  @current_resource.exists = ::File.exist?("#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}")
 end
