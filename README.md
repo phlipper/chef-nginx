@@ -268,6 +268,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * **[@perusio](https://github.com/perusio)**
     * Script for enabling and disabling sites, added and renamed by [@arvidbjorkstrom](https://github.com/arvidbjorkstrom)
 
+
 ## License
 
 **chef-nginx**
