@@ -17,8 +17,8 @@ server {
     fastcgi_index index.php;
     include fastcgi_params;
 
-    <% if node["chef_environment"] -%>
-    fastcgi_param ENV <%= node["chef_environment"] %>;
+    <% if node-chef_environment -%>
+    fastcgi_param ENV <%= node.chef_environment %>;
     <% else -%>
     fastcgi_param ENV local;
     <% end -%>
