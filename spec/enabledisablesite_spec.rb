@@ -6,8 +6,8 @@ describe "nginx::enabledisablesite" do
   end
 
   it "creates the `nxensite` script" do
-    ::File.stub(:exists?).with(anything).and_call_original
-    ::File.stub(:exists?).with("/usr/sbin/nxensite").and_return(false)
+    ::File.stub(:exist?).with(anything).and_call_original
+    ::File.stub(:exist?).with("/usr/sbin/nxensite").and_return(false)
 
     expect(chef_run).to create_template("/usr/sbin/nxensite").with(
       source: "nxensite.erb",
@@ -18,16 +18,16 @@ describe "nginx::enabledisablesite" do
   end
 
   it "creates the `nxdissite` link" do
-    ::File.stub(:exists?).with(anything).and_call_original
-    ::File.stub(:exists?).with("/usr/sbin/nxensite").and_return(true)
+    ::File.stub(:exist?).with(anything).and_call_original
+    ::File.stub(:exist?).with("/usr/sbin/nxensite").and_return(true)
     ::File.stub(:symlink?).with("/usr/sbin/nxdissite").and_return(false)
 
     expect(chef_run).to run_execute("ln -s /usr/sbin/nxensite /usr/sbin/nxdissite")
   end
 
   it "creates bash completion `nxendissite`" do
-    ::File.stub(:exists?).with(anything).and_call_original
-    ::File.stub(:exists?).with("/etc/bash_completion.d/nxendissite").and_return(false)
+    ::File.stub(:exist?).with(anything).and_call_original
+    ::File.stub(:exist?).with("/etc/bash_completion.d/nxendissite").and_return(false)
 
     expect(chef_run).to create_template("/etc/bash_completion.d/nxendissite").with(
       source: "nxendissite_completion.erb",
