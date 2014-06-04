@@ -3,6 +3,11 @@ LineLength:
   Exclude:
     - "**/attributes/*.rb"
     - "**/metadata.rb"
+    - "**/Rakefile"
+
+HashSyntax:
+  Exclude:
+    - "**/resources/*.rb"
 
 StringLiterals:
   EnforcedStyle: double_quotes
