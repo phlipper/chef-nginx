@@ -35,11 +35,9 @@ end
   end
 end
 
-template "#{node["nginx"]["dir"]}/sites-available/default" do
-  source "default-site.erb"
-  owner "root"
-  group "root"
-  mode  "0644"
+nginx_site "default" do
+  host node["hostname"]
+  root "/var/www/nginx-default"
   not_if { node["nginx"]["skip_default_site"] }
 end
 
