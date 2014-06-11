@@ -23,9 +23,8 @@ describe "nginx::enabledisablesite" do
     allow(File).to receive(:symlink?).with("/usr/sbin/nxdissite")
       .and_return(false)
 
-    expect(chef_run).to run_execute(
-      "ln -s /usr/sbin/nxensite \
-    /usr/sbin/nxdissite"
+    expect(chef_run).to create_link("/usr/sbin/nxdissite").with(
+      to: "/usr/sbin/nxensite"
     )
   end
 
