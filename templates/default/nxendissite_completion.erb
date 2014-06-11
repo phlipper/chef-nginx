@@ -32,7 +32,7 @@
 ## Handling of both enabled and available sites.
 _nxsites() {
 	# Get the available or enabled sites for nginx.
-	COMPREPLY=( $( compgen -W '$( command find /etc/nginx/$1 -type f -printf "%P " 2>/dev/null | sed 's/[.]conf$//' )' -- $cur  ) )
+	COMPREPLY=( $( compgen -W '$( command find <%= node["nginx"]["dir"] -%>/$1 -type f -printf "%P " 2>/dev/null | sed 's/[.]conf$//' )' -- $cur  ) )
 }
 
 # Autocomplete from available sites
