@@ -39,6 +39,7 @@ This cookbook requires Ruby 1.9+ and is tested against:
 * `nginx::service` - Internal recipe to setup the service definition.
 * `nginx::server` - Install and configure the `nginx` package.
 * `nginx::debug` - Install and configure the `nginx-debug` package.
+* `nginx::enabledisablesite` - Install enable and disable scripts for nginx sites.
 
 
 ## Resources and Providers
@@ -114,7 +115,7 @@ This would create a php-fpm enabled virtual host (provided you have php-fpm inst
 default["nginx"]["dir"]        = "/etc/nginx"
 default["nginx"]["log_dir"]    = "/var/log/nginx"
 default["nginx"]["user"]       = "www-data"
-default['nginx']['bin_dir']    = '/usr/sbin'
+default['nginx']["bin_dir"]    = "/usr/sbin"
 default["nginx"]["binary"]     = "/usr/sbin/nginx"
 default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
 default["nginx"]["version"]    = nil
