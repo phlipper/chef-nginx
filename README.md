@@ -39,11 +39,74 @@ This cookbook requires Ruby 1.9+ and is tested against:
 * `nginx::service` - Internal recipe to setup the service definition.
 * `nginx::server` - Install and configure the `nginx` package.
 * `nginx::debug` - Install and configure the `nginx-debug` package.
+* `nginx::enabledisablesite` - Install enable and disable scripts for nginx sites.
+
+
+## Resources and Providers
+
+This cookbook provides one resource with a corresponding provider
+
+### site.rb
+Manage virtual hosts - create, delete, enable and disable virtual host configurations
+
+Actions:
+
+* `create` - Create a virtual host configuration file.
+* `delete` - Delete a virtual host configuration file.
+* `enable` - Enable a virtual host configuration file.
+* `disable` - Disable a virtual host configuration file.
+
+Attribute Parameters (only used with the `create` action):
+
+* `listen` - the ip address and/or port to [listen](http://nginx.org/en/docs/http/ngx_http_core_module.html#listen) to, defaults to '80'
+* `host` - [server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name) for the virtualhost, defaults to 'localhost'
+* `root` - the path to the site [root](http://nginx.org/en/docs/http/ngx_http_core_module.html#root) folder, defaults to '/var/www'
+* `index` - the [index](http://nginx.org/en/docs/http/ngx_http_index_module.html) files, in order of use, defaults to 'index.html index.htm'
+* `slashlocation` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
+* `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
+* `accesslog` - enable or disable the access log, defaults to true
+* `templatecookbook` - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'
+* `templatesource` - override for the name of the template from the default 'site.erb'
 
 
 ## Usage
 
 This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.
+It also installs a nxensite and nxdissite script for enabling and disabling sites and provides a provider for creating and enabling/disabling nginx-sites.
+
+### nginx_site
+
+Create a nginx virtual host configuration file in the sites-available folder
+
+```ruby
+nginx_site 'example.com' do
+  host 'example.com www.example.com'
+  root '/var/www/example.com'
+end
+```
+
+This would create a configuration file for example.com and www.example.com that points to `/var/www/example.com`
+
+```ruby
+nginx_site 'example.com' do
+  action :enable
+end
+```
+
+This would enable a previously created site named 'example.com'
+
+```ruby
+nginx_site 'example.com' do
+  host 'example.com www.example.com'
+  root '/var/www/example.com'
+  index 'index.php index.html index.htm'
+  slashlocation 'try_files $uri $uri/ /index.php?$query_string'
+  phpfpm true
+  action [:create, :enable]
+end
+```
+
+This would create a php-fpm enabled virtual host (provided you have php-fpm installed) with a default rewrite to index.php and enable it
 
 
 ## Attributes
@@ -52,6 +115,7 @@ This cookbook installs the Nginx components if not present, and pulls updates if
 default["nginx"]["dir"]        = "/etc/nginx"
 default["nginx"]["log_dir"]    = "/var/log/nginx"
 default["nginx"]["user"]       = "www-data"
+default['nginx']["bin_dir"]    = "/usr/sbin"
 default["nginx"]["binary"]     = "/usr/sbin/nginx"
 default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
 default["nginx"]["version"]    = nil
@@ -172,7 +236,6 @@ Including, but not limited to ...
 * Fully support all of the standard Chef-supported distributions
 * Support additonal build configurations
 * Support additonal configuration file attributes
-* Provider for creating virtual hosts
 
 
 ## Contributing
@@ -201,6 +264,10 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add `skip_default_site` attribute
 * **[@RichardWigley](https://github.com/RichardWigley)**
     * add initial `test-kitchen` support
+* **[@arvidbjorkstrom](https://github.com/arvidbjorkstrom)**
+    * Provider for creating/deleting hosts configurations, enabling and disabling them
+* **[@perusio](https://github.com/perusio)**
+    * Script for enabling and disabling sites, added and renamed by [@arvidbjorkstrom](https://github.com/arvidbjorkstrom)
 
 
 ## License

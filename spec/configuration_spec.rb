@@ -49,16 +49,19 @@ describe "nginx::configuration" do
 
   context "default site" do
     let(:default_site) do
-      "/etc/nginx/sites-available/default"
+      "default"
     end
 
     context "when `skip_default_site` is false" do
+      let(:chef_run) do
+        ChefSpec::Runner.new do |node|
+          node.automatic_attrs["hostname"] = "chefspechostname"
+        end.converge(described_recipe, "nginx::service")
+      end
       it "creates the `default` template" do
-        expect(chef_run).to create_template(default_site).with(
-          source: "default-site.erb",
-          owner: "root",
-          group: "root",
-          mode:  "0644"
+        expect(chef_run).to create_nginx_site(default_site).with(
+          host: "chefspechostname",
+          root: "/var/www/nginx-default"
         )
       end
     end
