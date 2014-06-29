@@ -6,7 +6,6 @@ rescue LoadError
   puts "Unable to run `chefspec`"
   exit
 end
-require_relative "../library/matchers"
 
 RSpec.configure do |config|
   config.platform = "ubuntu"
