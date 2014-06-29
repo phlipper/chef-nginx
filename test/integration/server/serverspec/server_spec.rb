@@ -34,17 +34,60 @@ describe "nginx::configuration" do
   end
 
   describe "default conf.d templates" do
-    let(:default_templates) do
-      %w[buffers general gzip logs performance proxy ssl_session timeouts]
+    describe file("/etc/nginx/conf.d/buffers.conf") do
+      it { should be_a_file }
+      it { should be_owned_by "root" }
+      it { should be_grouped_into "root" }
+      it { should be_mode "644" }
     end
 
-    default_templates.each do |tmpl|
-      describe file("/etc/nginx/conf.d/#{tmpl}.conf") do
-        it { should be_a_file }
-        it { should be_owned_by "root" }
-        it { should be_grouped_into "root" }
-        it { should be_mode "644" }
-      end
+    describe file("/etc/nginx/conf.d/general.conf") do
+      it { should be_a_file }
+      it { should be_owned_by "root" }
+      it { should be_grouped_into "root" }
+      it { should be_mode "644" }
+    end
+
+    describe file("/etc/nginx/conf.d/gzip.conf") do
+      it { should be_a_file }
+      it { should be_owned_by "root" }
+      it { should be_grouped_into "root" }
+      it { should be_mode "644" }
+    end
+
+    describe file("/etc/nginx/conf.d/logs.conf") do
+      it { should be_a_file }
+      it { should be_owned_by "root" }
+      it { should be_grouped_into "root" }
+      it { should be_mode "644" }
+    end
+
+    describe file("/etc/nginx/conf.d/performance.conf") do
+      it { should be_a_file }
+      it { should be_owned_by "root" }
+      it { should be_grouped_into "root" }
+      it { should be_mode "644" }
+    end
+
+    describe file("/etc/nginx/conf.d/proxy.conf") do
+      it { should be_a_file }
+      it { should be_owned_by "root" }
+      it { should be_grouped_into "root" }
+      it { should be_mode "644" }
+    end
+
+    describe file("/etc/nginx/conf.d/ssl_session.conf") do
+      it { should be_a_file }
+      it { should be_owned_by "root" }
+      it { should be_grouped_into "root" }
+      it { should be_mode "644" }
+    end
+
+    describe file("/etc/nginx/conf.d/timeouts.conf") do
+      it { should be_a_file }
+      it { should be_owned_by "root" }
+      it { should be_grouped_into "root" }
+      it { should be_mode "644" }
     end
   end
 
