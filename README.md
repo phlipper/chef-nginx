@@ -12,8 +12,8 @@ Installs the [Nginx](http://nginx.org) web server.
 The following platforms are supported by this cookbook, meaning that the
 recipes should run on these platforms without error:
 
-* Ubuntu
-* Debian
+* Ubuntu 12.04+
+* Debian 6.0.8+
 
 ### Cookbooks
 
