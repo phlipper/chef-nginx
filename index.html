@@ -44,8 +44,8 @@
 recipes should run on these platforms without error:</p>
 
 <ul>
-<li>Ubuntu</li>
-<li>Debian</li>
+<li>Ubuntu 12.04+</li>
+<li>Debian 6.0.8+</li>
 </ul><h3>
 <a name="cookbooks" class="anchor" href="#cookbooks"><span class="octicon octicon-link"></span></a>Cookbooks</h3>
 
@@ -65,6 +65,7 @@ recipes should run on these platforms without error:</p>
 <ul>
 <li>1.9.3</li>
 <li>2.0.0</li>
+<li>2.1.2</li>
 </ul><h2>
 <a name="recipes" class="anchor" href="#recipes"><span class="octicon octicon-link"></span></a>Recipes</h2>
 
@@ -79,10 +80,87 @@ recipes should run on these platforms without error:</p>
 <code>nginx::server</code> - Install and configure the <code>nginx</code> package.</li>
 <li>
 <code>nginx::debug</code> - Install and configure the <code>nginx-debug</code> package.</li>
+<li>
+<code>nginx::enabledisablesite</code> - Install enable and disable scripts for nginx sites.</li>
+</ul><h2>
+<a name="resources-and-providers" class="anchor" href="#resources-and-providers"><span class="octicon octicon-link"></span></a>Resources and Providers</h2>
+
+<p>This cookbook provides one resource with a corresponding provider</p>
+
+<h3>
+<a name="siterb" class="anchor" href="#siterb"><span class="octicon octicon-link"></span></a>site.rb</h3>
+
+<p>Manage virtual hosts - create, delete, enable and disable virtual host configurations</p>
+
+<p>Actions:</p>
+
+<ul>
+<li>
+<code>create</code> - Create a virtual host configuration file.</li>
+<li>
+<code>delete</code> - Delete a virtual host configuration file.</li>
+<li>
+<code>enable</code> - Enable a virtual host configuration file.</li>
+<li>
+<code>disable</code> - Disable a virtual host configuration file.</li>
+</ul><p>Attribute Parameters (only used with the <code>create</code> action):</p>
+
+<ul>
+<li>
+<code>listen</code> - the ip address and/or port to <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen">listen</a> to, defaults to '80'</li>
+<li>
+<code>host</code> - <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name">server_name</a> for the virtualhost, defaults to 'localhost'</li>
+<li>
+<code>root</code> - the path to the site <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#root">root</a> folder, defaults to '/var/www'</li>
+<li>
+<code>index</code> - the <a href="http://nginx.org/en/docs/http/ngx_http_index_module.html">index</a> files, in order of use, defaults to 'index.html index.htm'</li>
+<li>
+<code>slashlocation</code> - basic <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">location</a> block configuration, defaults to 'try_files $uri $uri/'</li>
+<li>
+<code>phpfpm</code> - inserts a basic php fpm handler for .php files if true, defaults to false</li>
+<li>
+<code>accesslog</code> - enable or disable the access log, defaults to true</li>
+<li>
+<code>templatecookbook</code> - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'</li>
+<li>
+<code>templatesource</code> - override for the name of the template from the default 'site.erb'</li>
 </ul><h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.</p>
+<p>This cookbook installs the Nginx components if not present, and pulls updates if they are installed on the system.
+It also installs a nxensite and nxdissite script for enabling and disabling sites and provides a provider for creating and enabling/disabling nginx-sites.</p>
+
+<h3>
+<a name="nginx_site" class="anchor" href="#nginx_site"><span class="octicon octicon-link"></span></a>nginx_site</h3>
+
+<p>Create a nginx virtual host configuration file in the sites-available folder</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">nginx_site</span> <span class="s1">'example.com'</span> <span class="k">do</span>
+  <span class="n">host</span> <span class="s1">'example.com www.example.com'</span>
+  <span class="n">root</span> <span class="s1">'/var/www/example.com'</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>This would create a configuration file for example.com and <a href="http://www.example.com">www.example.com</a> that points to <code>/var/www/example.com</code></p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">nginx_site</span> <span class="s1">'example.com'</span> <span class="k">do</span>
+  <span class="n">action</span> <span class="ss">:enable</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>This would enable a previously created site named 'example.com'</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">nginx_site</span> <span class="s1">'example.com'</span> <span class="k">do</span>
+  <span class="n">host</span> <span class="s1">'example.com www.example.com'</span>
+  <span class="n">root</span> <span class="s1">'/var/www/example.com'</span>
+  <span class="n">index</span> <span class="s1">'index.php index.html index.htm'</span>
+  <span class="n">slashlocation</span> <span class="s1">'try_files $uri $uri/ /index.php?$query_string'</span>
+  <span class="n">phpfpm</span> <span class="kp">true</span>
+  <span class="n">action</span> <span class="o">[</span><span class="ss">:create</span><span class="p">,</span> <span class="ss">:enable</span><span class="o">]</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>This would create a php-fpm enabled virtual host (provided you have php-fpm installed) with a default rewrite to index.php and enable it</p>
 
 <h2>
 <a name="attributes" class="anchor" href="#attributes"><span class="octicon octicon-link"></span></a>Attributes</h2>
@@ -90,6 +168,7 @@ recipes should run on these platforms without error:</p>
 <div class="highlight highlight-ruby"><pre><span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"dir"</span><span class="o">]</span>        <span class="o">=</span> <span class="s2">"/etc/nginx"</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"log_dir"</span><span class="o">]</span>    <span class="o">=</span> <span class="s2">"/var/log/nginx"</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"user"</span><span class="o">]</span>       <span class="o">=</span> <span class="s2">"www-data"</span>
+<span class="n">default</span><span class="o">[</span><span class="s1">'nginx'</span><span class="o">][</span><span class="s2">"bin_dir"</span><span class="o">]</span>    <span class="o">=</span> <span class="s2">"/usr/sbin"</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"binary"</span><span class="o">]</span>     <span class="o">=</span> <span class="s2">"/usr/sbin/nginx"</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"pid_file"</span><span class="o">]</span>   <span class="o">=</span> <span class="s2">"/var/run/nginx.pid"</span>
 <span class="n">default</span><span class="o">[</span><span class="s2">"nginx"</span><span class="o">][</span><span class="s2">"version"</span><span class="o">]</span>    <span class="o">=</span> <span class="kp">nil</span>
@@ -211,7 +290,6 @@ recipes should run on these platforms without error:</p>
 <li>Fully support all of the standard Chef-supported distributions</li>
 <li>Support additonal build configurations</li>
 <li>Support additonal configuration file attributes</li>
-<li>Provider for creating virtual hosts</li>
 </ul><h2>
 <a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
@@ -253,6 +331,28 @@ recipes should run on these platforms without error:</p>
 <li>add <code>skip_default_site</code> attribute</li>
 </ul>
 </li>
+<li>
+<strong><a href="https://github.com/RichardWigley">@RichardWigley</a></strong>
+
+<ul>
+<li>add initial <code>test-kitchen</code> support</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/arvidbjorkstrom">@arvidbjorkstrom</a></strong>
+
+<ul>
+<li>Provider for creating/deleting hosts configurations, enabling and disabling them</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/perusio">@perusio</a></strong>
+
+<ul>
+<li>Script for enabling and disabling sites, added and renamed by <a href="https://github.com/arvidbjorkstrom">@arvidbjorkstrom</a>
+</li>
+</ul>
+</li>
 </ul><h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
@@ -263,7 +363,7 @@ recipes should run on these platforms without error:</p>
 <li>Copyright (c) 2012-2014 Phil Cohen (<a href="mailto:github@phlippers.net">github@phlippers.net</a>) <a href="http://coderwall.com/phlipper"><img src="http://api.coderwall.com/phlipper/endorsecount.png" alt="endorse"></a> <a href="https://www.gittip.com/phlipper/"><img src="http://img.shields.io/gittip/phlipper.png" alt="Gittip"></a>
 </li>
 <li><a href="http://phlippers.net/">http://phlippers.net/</a></li>
-</ul><p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/phlipper/chef-nginx/trend.png" alt="Bitdeli Badge"></a></p>
+</ul>
       </section>
     </div>
     <footer>
