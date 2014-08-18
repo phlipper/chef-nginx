@@ -7,91 +7,61 @@ def whyrun_supported?
   true
 end
 
+use_inline_resources
+
 action :create do
-  if @current_resource.exists
-    Chef::Log.info "#{@new_resource} already exists - nothing to do."
-  else
-    converge_by("Create configuration file for #{@new_resource}") do
-      template "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}" do
-        source new_resource.templatesource
-        cookbook new_resource.templatecookbook
-        owner "root"
-        group "root"
-        mode "0644"
-        variables(
-          name: new_resource.name,
-          listen: new_resource.listen,
-          host: new_resource.host,
-          root: new_resource.root,
-          index: new_resource.index,
-          slashlocation: new_resource.slashlocation,
-          phpfpm: new_resource.phpfpm,
-          accesslog: new_resource.accesslog
-        )
-        not_if do
-          ::File.exist?(
-            "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}"
-          )
-        end
-      end
-    end
+  template nginx_available_file do
+    source new_resource.templatesource
+    cookbook new_resource.templatecookbook
+    owner "root"
+    group "root"
+    mode "0644"
+    variables(
+      name: new_resource.name,
+      listen: new_resource.listen,
+      host: new_resource.host,
+      root: new_resource.root,
+      index: new_resource.index,
+      slashlocation: new_resource.slashlocation,
+      phpfpm: new_resource.phpfpm,
+      accesslog: new_resource.accesslog
+    )
   end
 end
 
 action :delete do
   if @current_resource.exists
-    converge_by("Disable and remove configuration file for #{@new_resource}") do
-      nginx_site new_resource.name do
-        action :disable
-      end
+    nginx_site new_resource.name do
+      action :disable
+    end
 
-      file "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}" do
-        action :delete
-        only_if do
-          ::File.exist?(
-            "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}"
-          )
-        end
-      end
+    file nginx_available_file do
+      action :delete
     end
   else
-    Chef::Log.info "#{@new_resource} doesn't exists - nothing to do."
+    log_missing_resource
   end
 end
 
 action :enable do
   if @current_resource.exists
-    converge_by("Enable #{@new_resource} configuration and restart nginx") do
-      execute "nxensite #{new_resource.name}" do
-        command "#{node["nginx"]["bin_dir"]}/nxensite #{new_resource.name}"
-        not_if do
-          ::File.symlink?(
-            "#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}"
-          )
-        end
-        notifies :reload, "service[nginx]"
-      end
+    execute "nxensite #{new_resource.name}" do
+      command "#{node["nginx"]["bin_dir"]}/nxensite #{new_resource.name}"
+      not_if { ::File.exist?(nginx_enabled_file) }
     end
   else
-    Chef::Log.info "#{@new_resource} doesn't exists - nothing to do."
+    log_missing_resource
   end
 end
 
 action :disable do
   if @current_resource.exists
-    converge_by("Disable #{@new_resource} if enabled and restart nginx") do
-      execute "nxdissite #{new_resource.name}" do
-        command "#{node["nginx"]["bin_dir"]}/nxdissite #{new_resource.name}"
-        only_if do
-          ::File.symlink?(
-            "#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}"
-          )
-        end
-        notifies :reload, "service[nginx]"
-      end
+    execute "nxdissite #{new_resource.name}" do
+      command "#{node["nginx"]["bin_dir"]}/nxdissite #{new_resource.name}"
+      only_if { ::File.exist?(nginx_enabled_file) }
     end
   else
-    Chef::Log.info "#{@new_resource} doesn't exists - nothing to do."
+    log_missing_resource
   end
 end
 
@@ -99,7 +69,17 @@ def load_current_resource
   @current_resource = Chef::Resource::NginxSite.new(@new_resource.name)
   @current_resource.name(@new_resource.name)
 
-  @current_resource.exists = ::File.exist?(
-    "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}"
-  )
+  @current_resource.exists = ::File.exist?(nginx_available_file)
+end
+
+def nginx_available_file
+  "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}"
+end
+
+def nginx_enabled_file
+  "#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}"
+end
+
+def log_missing_resource
+  Chef::Log.info "#{@new_resource} doesn't exist - nothing to do."
 end
