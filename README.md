@@ -66,7 +66,7 @@ Attribute Parameters (only used with the `create` action):
 * `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
 * `access_log` - enable or disable the access log, defaults to true
 * `template_cookbook` - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'
-* `templatesource` - override for the name of the template from the default 'site.erb'
+* `template_source` - override for the name of the template from the default 'site.erb'
 
 
 ## Usage

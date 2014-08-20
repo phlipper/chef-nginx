@@ -11,7 +11,7 @@ use_inline_resources
 
 action :create do
   template nginx_available_file do
-    source new_resource.templatesource
+    source new_resource.template_source
     cookbook new_resource.template_cookbook
     owner "root"
     group "root"

@@ -16,6 +16,6 @@ attribute :slashlocation, kind_of: String, default: "try_files $uri $uri/"
 attribute :phpfpm, kind_of: [TrueClass, FalseClass], default: false
 attribute :access_log, kind_of: [TrueClass, FalseClass], default: true
 attribute :template_cookbook, kind_of: String, default: "nginx"
-attribute :templatesource, kind_of: String, default: "site.erb"
+attribute :template_source, kind_of: String, default: "site.erb"
 
 attr_accessor :exists
