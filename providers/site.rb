@@ -24,7 +24,7 @@ action :create do
       index: new_resource.index,
       slashlocation: new_resource.slashlocation,
       phpfpm: new_resource.phpfpm,
-      accesslog: new_resource.accesslog
+      access_log: new_resource.access_log
     )
   end
 end

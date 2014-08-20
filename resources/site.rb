@@ -14,7 +14,7 @@ attribute :root, kind_of: String, default: "/var/www"
 attribute :index, kind_of: String, default: "index.html index.htm"
 attribute :slashlocation, kind_of: String, default: "try_files $uri $uri/"
 attribute :phpfpm, kind_of: [TrueClass, FalseClass], default: false
-attribute :accesslog, kind_of: [TrueClass, FalseClass], default: true
+attribute :access_log, kind_of: [TrueClass, FalseClass], default: true
 attribute :templatecookbook, kind_of: String, default: "nginx"
 attribute :templatesource, kind_of: String, default: "site.erb"
 

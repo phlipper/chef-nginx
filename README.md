@@ -64,7 +64,7 @@ Attribute Parameters (only used with the `create` action):
 * `index` - the [index](http://nginx.org/en/docs/http/ngx_http_index_module.html) files, in order of use, defaults to 'index.html index.htm'
 * `slashlocation` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
 * `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
-* `accesslog` - enable or disable the access log, defaults to true
+* `access_log` - enable or disable the access log, defaults to true
 * `templatecookbook` - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'
 * `templatesource` - override for the name of the template from the default 'site.erb'
 

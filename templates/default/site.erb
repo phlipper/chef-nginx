@@ -45,7 +45,7 @@ server {
     deny all;
   }
 
-  <% if @accesslog -%>
+  <% if @access_log -%>
   access_log <%= node["nginx"]["log_dir"] %>/<%= @host %>.access.log;
   <% else -%>
   access_log off;
