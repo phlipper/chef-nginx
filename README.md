@@ -21,7 +21,7 @@ recipes should run on these platforms without error:
 
 ### Chef
 
-It is recommended to use a version of Chef `>= 10.16.4` as that is the target of my usage and testing, though this should work with most recent versions.
+* Chef 11+
 
 ### Ruby
 

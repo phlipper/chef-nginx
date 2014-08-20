@@ -32,7 +32,7 @@ default["nginx"]["gzip_comp_level"]   = "2"
 default["nginx"]["gzip_proxied"]      = "any"
 default["nginx"]["gzip_vary"]         = "on"
 default["nginx"]["gzip_min_length"]   = "0"
-default["nginx"]["gzip_disable"]      = %q|"MSIE [1-6].(?!.*SV1)"|
+default["nginx"]["gzip_disable"]      = %|"MSIE [1-6].(?!.*SV1)"|
 default["nginx"]["gzip_types"]        = %w[
   text/css text/javascript text/xml text/plain text/x-component
   application/x-javascript application/javascript application/json
