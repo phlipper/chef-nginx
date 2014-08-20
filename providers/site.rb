@@ -12,7 +12,7 @@ use_inline_resources
 action :create do
   template nginx_available_file do
     source new_resource.templatesource
-    cookbook new_resource.templatecookbook
+    cookbook new_resource.template_cookbook
     owner "root"
     group "root"
     mode "0644"
