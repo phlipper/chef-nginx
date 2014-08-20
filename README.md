@@ -79,28 +79,28 @@ It also installs a nxensite and nxdissite script for enabling and disabling site
 Create a nginx virtual host configuration file in the sites-available folder
 
 ```ruby
-nginx_site 'example.com' do
-  host 'example.com www.example.com'
-  root '/var/www/example.com'
+nginx_site "example.com" do
+  host "example.com www.example.com"
+  root "/var/www/example.com"
 end
 ```
 
 This would create a configuration file for example.com and www.example.com that points to `/var/www/example.com`
 
 ```ruby
-nginx_site 'example.com' do
+nginx_site "example.com" do
   action :enable
 end
 ```
 
-This would enable a previously created site named 'example.com'
+This would enable a previously created site named `example.com`
 
 ```ruby
-nginx_site 'example.com' do
-  host 'example.com www.example.com'
-  root '/var/www/example.com'
-  index 'index.php index.html index.htm'
-  location 'try_files $uri $uri/ /index.php?$query_string'
+nginx_site "example.com" do
+  host "example.com www.example.com"
+  root "/var/www/example.com"
+  index "index.php index.html index.htm"
+  location "try_files $uri $uri/ /index.php?$query_string"
   phpfpm true
   action [:create, :enable]
 end
