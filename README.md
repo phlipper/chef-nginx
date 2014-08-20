@@ -62,7 +62,7 @@ Attribute Parameters (only used with the `create` action):
 * `host` - [server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name) for the virtualhost, defaults to 'localhost'
 * `root` - the path to the site [root](http://nginx.org/en/docs/http/ngx_http_core_module.html#root) folder, defaults to '/var/www'
 * `index` - the [index](http://nginx.org/en/docs/http/ngx_http_index_module.html) files, in order of use, defaults to 'index.html index.htm'
-* `slashlocation` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
+* `location` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
 * `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
 * `access_log` - enable or disable the access log, defaults to true
 * `template_cookbook` - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'
@@ -100,7 +100,7 @@ nginx_site 'example.com' do
   host 'example.com www.example.com'
   root '/var/www/example.com'
   index 'index.php index.html index.htm'
-  slashlocation 'try_files $uri $uri/ /index.php?$query_string'
+  location 'try_files $uri $uri/ /index.php?$query_string'
   phpfpm true
   action [:create, :enable]
 end

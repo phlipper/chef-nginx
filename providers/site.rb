@@ -22,7 +22,7 @@ action :create do
       host: new_resource.host,
       root: new_resource.root,
       index: new_resource.index,
-      slashlocation: new_resource.slashlocation,
+      location: new_resource.location,
       phpfpm: new_resource.phpfpm,
       access_log: new_resource.access_log
     )
