@@ -50,5 +50,5 @@ server {
   <% else -%>
   access_log off;
   <% end -%>
-  error_log  <%= node["nginx"]["log_dir"] %>/<%= @host %>-error.log error;
+  error_log  <%= node["nginx"]["log_dir"] %>/<%= @host %>.error.log error;
 }
