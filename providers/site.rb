@@ -11,8 +11,8 @@ use_inline_resources
 
 action :create do
   template nginx_available_file do
-    source new_resource.templatesource
-    cookbook new_resource.templatecookbook
+    source new_resource.template_source
+    cookbook new_resource.template_cookbook
     owner "root"
     group "root"
     mode "0644"
@@ -22,9 +22,9 @@ action :create do
       host: new_resource.host,
       root: new_resource.root,
       index: new_resource.index,
-      slashlocation: new_resource.slashlocation,
+      location: new_resource.location,
       phpfpm: new_resource.phpfpm,
-      accesslog: new_resource.accesslog
+      access_log: new_resource.access_log
     )
   end
 end

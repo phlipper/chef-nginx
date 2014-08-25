@@ -6,7 +6,7 @@ server {
   index <%= @index %>;
 
   location / {
-    <%= @slashlocation %>;
+    <%= @location %>;
   }
 
   <% if @phpfpm -%>
@@ -45,10 +45,10 @@ server {
     deny all;
   }
 
-  <% if @accesslog -%>
+  <% if @access_log -%>
   access_log <%= node["nginx"]["log_dir"] %>/<%= @host %>.access.log;
   <% else -%>
   access_log off;
   <% end -%>
-  error_log  <%= node["nginx"]["log_dir"] %>/<%= @host %>-error.log error;
+  error_log  <%= node["nginx"]["log_dir"] %>/<%= @host %>.error.log error;
 }
