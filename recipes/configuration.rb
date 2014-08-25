@@ -3,18 +3,21 @@
 # Recipe:: configuration
 #
 
+[node["nginx"]["dir"], node["nginx"]["log_dir"]].each do |dir|
+  directory dir do
+    owner "root"
+    group "root"
+    mode "0755"
+    recursive true
+  end
+end
+
 cookbook_file "#{node["nginx"]["dir"]}/mime.types" do
   source "mime.types"
   owner "root"
   group "root"
   mode  "0644"
   notifies :restart, "service[nginx]"
-end
-
-directory node["nginx"]["log_dir"] do
-  owner "root"
-  group "root"
-  recursive true
 end
 
 template "nginx.conf" do
