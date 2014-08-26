@@ -44,6 +44,15 @@ nginx_site "default" do
   not_if { node["nginx"]["skip_default_site"] }
 end
 
+# ensure default site is removed if necessary
+%w[enabled available].each do |dir|
+  file "#{node["nginx"]["dir"]}/sites-#{dir}/default" do
+    action :delete
+    only_if { node["nginx"]["skip_default_site"] }
+    notifies :restart, "service[nginx]"
+  end
+end
+
 node["nginx"]["conf_files"].each do |config_file|
   template config_file do
     path "#{node["nginx"]["dir"]}/conf.d/#{config_file}.conf"
