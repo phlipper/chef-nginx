@@ -67,6 +67,7 @@ Attribute Parameters (only used with the `create` action):
 * `access_log` - enable or disable the access log, defaults to true
 * `template_cookbook` - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'
 * `template_source` - override for the name of the template from the default 'site.erb'
+* `custom` - array of extra data for any custom things you might throw into your override template
 
 
 ## Usage
