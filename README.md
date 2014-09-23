@@ -65,9 +65,9 @@ Attribute Parameters (only used with the `create` action):
 * `location` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
 * `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
 * `access_log` - enable or disable the access log, defaults to true
+* `custom` - hash of extra data for any custom things you might throw into your override template, defaults to an empty hash
 * `template_cookbook` - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'
 * `template_source` - override for the name of the template from the default 'site.erb'
-* `custom` - array of extra data for any custom things you might throw into your override template
 
 
 ## Usage
