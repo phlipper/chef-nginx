@@ -109,6 +109,21 @@ end
 
 This would create a php-fpm enabled virtual host (provided you have php-fpm installed) with a default rewrite to index.php and enable it
 
+```ruby
+my_data = { 'env' => 'production' }
+
+nginx_site "example.com" do
+  host "example.com www.example.com"
+  root "/var/www/example.com"
+  custom_data my_data
+  template_cookbook 'my_cookbook'
+  template_source 'my.conf.erb'
+  action [:create, :enable]
+end
+```
+
+This would create a virtual host using your own custom template ´my.conf.erb´ in the cookbook ´my_cookbook´. The contents of ´my_data´ will be available in the template, thus writing ´@custom_data['environment']´ in your template will yield ´production´ in this example. And as with the previous examples `:enable` will make the site enabled.
+
 
 ## Attributes
 
