@@ -25,7 +25,7 @@ action :create do
       location: new_resource.location,
       phpfpm: new_resource.phpfpm,
       access_log: new_resource.access_log,
-      custom: new_resource.custom
+      custom_data: new_resource.custom_data
     )
   end
 end
