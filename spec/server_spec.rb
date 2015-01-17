@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "nginx::server" do
   let(:chef_run) do
-    ChefSpec::Runner.new.converge(described_recipe)
+    ChefSpec::SoloRunner.new.converge(described_recipe)
   end
 
   specify do
@@ -18,7 +18,7 @@ describe "nginx::server" do
 
   context "with a specific `package_name` and `version`" do
     let(:chef_run) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.set["nginx"]["package_name"] = "nginx-chefspec"
         node.set["nginx"]["version"] = "1.2.3"
       end.converge(described_recipe)
@@ -34,7 +34,7 @@ describe "nginx::server" do
   context "with `ppa` or `phusion` repository sources" do
     context "ppa" do
       let(:chef_run) do
-        ChefSpec::Runner.new do |node|
+        ChefSpec::SoloRunner.new do |node|
           node.set["nginx"]["repository"] = "ppa"
         end.converge(described_recipe)
       end
@@ -46,7 +46,7 @@ describe "nginx::server" do
 
     context "phusion" do
       let(:chef_run) do
-        ChefSpec::Runner.new do |node|
+        ChefSpec::SoloRunner.new do |node|
           node.set["nginx"]["repository"] = "phusion"
         end.converge(described_recipe)
       end
