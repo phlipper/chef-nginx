@@ -5,6 +5,14 @@ describe "nginx::configuration" do
     ChefSpec::Runner.new.converge(described_recipe, "nginx::service")
   end
 
+  it "creates the configuration directory" do
+    expect(chef_run).to create_directory("/etc/nginx").with(
+      owner: "root",
+      group: "root",
+      recursive: true
+    )
+  end
+
   it "creates the `mime.types` file" do
     expect(chef_run).to create_cookbook_file("/etc/nginx/mime.types").with(
       source: "mime.types",
