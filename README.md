@@ -281,6 +281,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add initial `test-kitchen` support
 * **[@arvidbjorkstrom](https://github.com/arvidbjorkstrom)**
     * Provider for creating/deleting hosts configurations, enabling and disabling them
+    * add `custom_data` attribute to the `site` LWRP
 * **[@perusio](https://github.com/perusio)**
     * Script for enabling and disabling sites, added and renamed by [@arvidbjorkstrom](https://github.com/arvidbjorkstrom)
 * **[@morr](https://github.com/morr)**
