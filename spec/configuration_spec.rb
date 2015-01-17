@@ -73,6 +73,13 @@ describe "nginx::configuration" do
           root: "/var/www/nginx-default"
         )
       end
+
+      it "does not remove the default site configuration" do
+        expect(chef_run).to_not delete_file(
+          "/etc/nginx/sites-available/default"
+        )
+        expect(chef_run).to_not delete_file("/etc/nginx/sites-enabled/default")
+      end
     end
 
     context "when `skip_default_site` is true" do
@@ -84,6 +91,11 @@ describe "nginx::configuration" do
 
       it "does not create the `default` template" do
         expect(chef_run).to_not create_template(default_site)
+      end
+
+      it "removes the default site configuration" do
+        expect(chef_run).to delete_file("/etc/nginx/sites-available/default")
+        expect(chef_run).to delete_file("/etc/nginx/sites-enabled/default")
       end
     end
   end
