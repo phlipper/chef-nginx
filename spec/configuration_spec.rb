@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "nginx::configuration" do
   let(:chef_run) do
-    ChefSpec::Runner.new.converge(described_recipe, "nginx::service")
+    ChefSpec::SoloRunner.new.converge(described_recipe, "nginx::service")
   end
 
   it "creates the configuration directory" do
@@ -62,27 +62,40 @@ describe "nginx::configuration" do
 
     context "when `skip_default_site` is false" do
       let(:chef_run) do
-        ChefSpec::Runner.new do |node|
+        ChefSpec::SoloRunner.new do |node|
           node.automatic_attrs["hostname"] = "chefspechostname"
         end.converge(described_recipe, "nginx::service")
       end
+
       it "creates the `default` template" do
         expect(chef_run).to create_nginx_site(default_site).with(
           host: "chefspechostname",
           root: "/var/www/nginx-default"
         )
       end
+
+      it "does not remove the default site configuration" do
+        expect(chef_run).to_not delete_file(
+          "/etc/nginx/sites-available/default"
+        )
+        expect(chef_run).to_not delete_file("/etc/nginx/sites-enabled/default")
+      end
     end
 
     context "when `skip_default_site` is true" do
       let(:chef_run) do
-        ChefSpec::Runner.new do |node|
+        ChefSpec::SoloRunner.new do |node|
           node.set["nginx"]["skip_default_site"] = true
         end.converge(described_recipe, "nginx::service")
       end
 
       it "does not create the `default` template" do
         expect(chef_run).to_not create_template(default_site)
+      end
+
+      it "removes the default site configuration" do
+        expect(chef_run).to delete_file("/etc/nginx/sites-available/default")
+        expect(chef_run).to delete_file("/etc/nginx/sites-enabled/default")
       end
     end
   end
@@ -116,7 +129,7 @@ describe "nginx::configuration" do
 
     context "custom attributes" do
       let(:chef_run) do
-        ChefSpec::Runner.new do |node|
+        ChefSpec::SoloRunner.new do |node|
           node.set["nginx"]["conf_files"] = %w[foo bar baz]
         end.converge(described_recipe, "nginx::service")
       end
@@ -169,7 +182,7 @@ describe "nginx::configuration" do
 
     context "when `enable_stub_status` is false" do
       let(:chef_run) do
-        ChefSpec::Runner.new do |node|
+        ChefSpec::SoloRunner.new do |node|
           node.set["nginx"]["enable_stub_status"] = false
         end.converge(described_recipe, "nginx::service")
       end

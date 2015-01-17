@@ -7,7 +7,7 @@ describe "nginx::default" do
 
   context "official source" do
     let(:chef_run) do
-      ChefSpec::Runner.new.converge(described_recipe)
+      ChefSpec::SoloRunner.new.converge(described_recipe)
     end
 
     it "sets up the 'official' repository" do
@@ -23,7 +23,7 @@ describe "nginx::default" do
 
   context "ppa source" do
     let(:chef_run) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.set["nginx"]["repository"] = "ppa"
       end.converge(described_recipe)
     end
@@ -41,7 +41,7 @@ describe "nginx::default" do
 
   context "phusion source" do
     let(:chef_run) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.set["nginx"]["repository"] = "phusion"
       end.converge(described_recipe)
     end
@@ -59,7 +59,7 @@ describe "nginx::default" do
 
   context "invalid source" do
     let(:chef_run) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.set["nginx"]["repository"] = "invalid"
       end.converge(described_recipe)
     end
