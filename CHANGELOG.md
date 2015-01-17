@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of nginx.
 
+## 0.6.0 (2015-01-17)
+
+* Add `nginx_site` LWRP
+* Add proper mime types for web fonts
+* Improve test coverage and CI configuration
+
 ## 0.5.5 (2013-12-21)
 
 * Fix `mime.types` file location
