@@ -27,7 +27,6 @@ recipes should run on these platforms without error:
 
 This cookbook requires Ruby 1.9+ and is tested against:
 
-* 1.9.3
 * 2.0.0
 * 2.1.2
 
