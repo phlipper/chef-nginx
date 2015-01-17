@@ -268,6 +268,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * Provider for creating/deleting hosts configurations, enabling and disabling them
 * **[@perusio](https://github.com/perusio)**
     * Script for enabling and disabling sites, added and renamed by [@arvidbjorkstrom](https://github.com/arvidbjorkstrom)
+* **[@morr](https://github.com/morr)**
+    * update `mime.types` to support web fonts correctly
 
 
 ## License
