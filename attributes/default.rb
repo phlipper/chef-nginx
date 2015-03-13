@@ -97,6 +97,8 @@ default["nginx"]["status_port"]        = 80
 
 default["nginx"]["skip_default_site"]  = false
 
+default["nginx"]["skip_default_mime_types"] = false
+
 default["nginx"]["repository"] = "official"
 default["nginx"]["repository_sources"] = {
   "official" => {

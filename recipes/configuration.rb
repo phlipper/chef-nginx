@@ -18,6 +18,7 @@ cookbook_file "#{node["nginx"]["dir"]}/mime.types" do
   group "root"
   mode  "0644"
   notifies :restart, "service[nginx]"
+  not_if { node["nginx"]["skip_default_mime_types"] }
 end
 
 template "nginx.conf" do
