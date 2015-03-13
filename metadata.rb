@@ -4,7 +4,7 @@ maintainer_email "github@phlippers.net"
 license          "MIT"
 description      "Installs/configures nginx"
 long_description "Please refer to README.md"
-version          "0.6.0"
+version          "0.6.1"
 
 recipe "nginx", "The default recipe which sets up the repository."
 recipe "nginx::configuration", "Internal recipe to setup the configuration files."

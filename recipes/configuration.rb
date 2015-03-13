@@ -73,3 +73,12 @@ template "#{node["nginx"]["dir"]}/conf.d/nginx_status.conf" do
   variables(port: node["nginx"]["status_port"])
   only_if { node["nginx"]["enable_stub_status"] }
 end
+
+template "#{node["nginx"]["dir"]}/conf.d/passenger.conf" do
+  source "passenger.conf.erb"
+  owner  "root"
+  group  "root"
+  mode   "0644"
+  notifies :restart, "service[nginx]"
+  only_if { node["nginx"]["passenger_enable"] }
+end
