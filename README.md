@@ -210,7 +210,12 @@ default["nginx"]["passenger_config"]         = {
   "passenger_pool_idle_time" => 300,
   "passenger_max_pool_size"  => 6
 }
-default["nginx"]["passenger_headers"]        = {}
+default["nginx"]["passenger_headers"]        = {
+  # "X-Forwarded-For" => "$http_x_forwarded_for"
+}
+default["nginx"]["passenger_prestart_urls"]  = [
+  # "http://myawesomeapp.com:81/"
+]
 
 default["nginx"]["enable_stub_status"] = true
 default["nginx"]["status_port"]        = 80

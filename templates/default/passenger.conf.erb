@@ -13,3 +13,8 @@ passenger_ruby <%= node["nginx"]["passenger_ruby"] || `which ruby`.strip %>;
 <% node["nginx"]["passenger_headers"].each do |key, value| %>
 passenger_set_header <%= key %> <%= value %>;
 <% end %>
+
+# Prestart URLs
+<% node["nginx"]["passenger_prestart_urls"].each do |url| %>
+passenger_pre_start <%= url %>;
+<% end %>
