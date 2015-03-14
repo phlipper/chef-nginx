@@ -1,8 +1,8 @@
 # Passenger Root
-passenger_root <%= `/usr/bin/passenger-config --root`.strip %>;
+passenger_root <%= Mixlib::ShellOut.new("/usr/bin/passenger-config --root").run_command.stdout.strip %>;
 
 # Default ruby to use
-passenger_ruby <%= node["nginx"]["passenger_ruby"] || `which ruby`.strip %>;
+passenger_ruby <%= node["nginx"]["passenger_ruby"] || Mixlib::ShellOut.new("which ruby").run_command.stdout.strip %>;
 
 # Default config settings
 <% node["nginx"]["passenger_config"].each do |key, value| %>
