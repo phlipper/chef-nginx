@@ -1,0 +1,20 @@
+# Passenger Root
+passenger_root <%= Mixlib::ShellOut.new("/usr/bin/passenger-config --root").run_command.stdout.strip %>;
+
+# Default ruby to use
+passenger_ruby <%= node["nginx"]["passenger_ruby"] || Mixlib::ShellOut.new("which ruby").run_command.stdout.strip %>;
+
+# Default config settings
+<% node["nginx"]["passenger_config"].each do |key, value| %>
+<%= key %> <%= value %>;
+<% end %>
+
+# Default Headers to send
+<% node["nginx"]["passenger_headers"].each do |key, value| %>
+passenger_set_header <%= key %> <%= value %>;
+<% end %>
+
+# Prestart URLs
+<% node["nginx"]["passenger_prestart_urls"].each do |url| %>
+passenger_pre_start <%= url %>;
+<% end %>

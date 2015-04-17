@@ -133,6 +133,7 @@ default["nginx"]["user"]       = "www-data"
 default['nginx']["bin_dir"]    = "/usr/sbin"
 default["nginx"]["binary"]     = "/usr/sbin/nginx"
 default["nginx"]["pid_file"]   = "/var/run/nginx.pid"
+default["nginx"]["purge_old"]  = false # purges all installed versions of nginx via apt-get purge
 default["nginx"]["version"]    = nil
 default["nginx"]["package_name"] = "nginx"  # nginx[-light|full|extras]
 
@@ -204,13 +205,24 @@ default["nginx"]["ssl_session_cache"]        = "shared:SSL:10m"
 default["nginx"]["ssl_session_timeout"]      = "10m"
 
 default["nginx"]["passenger_enable"]         = false
-default["nginx"]["passenger_max_pool_size"]  = 6
-default["nginx"]["passenger_pool_idle_time"] = 300
+default["nginx"]["passenger_ruby"]           = nil # if nil, uses `which ruby`
+default["nginx"]["passenger_config"]         = {
+  "passenger_pool_idle_time" => 300,
+  "passenger_max_pool_size"  => 6
+}
+default["nginx"]["passenger_headers"]        = {
+  # "X-Forwarded-For" => "$http_x_forwarded_for"
+}
+default["nginx"]["passenger_prestart_urls"]  = [
+  # "http://myawesomeapp.com:81/"
+]
 
 default["nginx"]["enable_stub_status"] = true
 default["nginx"]["status_port"]        = 80
 
 default["nginx"]["skip_default_site"]  = false
+
+default["nginx"]["skip_default_mime_types"] = false
 
 default["nginx"]["repository"] = "official"
 default["nginx"]["repository_sources"] = {

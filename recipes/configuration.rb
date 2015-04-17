@@ -18,6 +18,7 @@ cookbook_file "#{node["nginx"]["dir"]}/mime.types" do
   group "root"
   mode  "0644"
   notifies :restart, "service[nginx]"
+  not_if { node["nginx"]["skip_default_mime_types"] }
 end
 
 template "nginx.conf" do
@@ -72,4 +73,13 @@ template "#{node["nginx"]["dir"]}/conf.d/nginx_status.conf" do
   notifies :restart, "service[nginx]"
   variables(port: node["nginx"]["status_port"])
   only_if { node["nginx"]["enable_stub_status"] }
+end
+
+template "#{node["nginx"]["dir"]}/conf.d/passenger.conf" do
+  source "passenger.conf.erb"
+  owner  "root"
+  group  "root"
+  mode   "0644"
+  notifies :restart, "service[nginx]"
+  only_if { node["nginx"]["passenger_enable"] }
 end

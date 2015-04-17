@@ -3,6 +3,8 @@
 # Recipe:: default
 #
 
+include_recipe "nginx::purge_old_versions"
+
 repo = node["nginx"]["repository_sources"].fetch(node["nginx"]["repository"])
 
 apt_repository "nginx" do
