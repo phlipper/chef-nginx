@@ -2,6 +2,15 @@
 
 This file is used to list changes made in each version of nginx.
 
+## 0.7.0 (2016-04-06)
+
+* Support for CentOS, tested against CentOS 6.7
+* Verify test coverage on CentOS
+* Removed ssh configuration in kitchen, files not included with repo
+* Rubocop changes
+  * Max Line Length = 200
+  * Change " to ' and replace interpolation and quoting rubocop lines
+
 ## 0.6.0 (2015-01-17)
 
 * Add `nginx_site` LWRP
