@@ -1,6 +1,10 @@
 LineLength:
   Max: 200
 
+Style/RegexpLiteral:
+  Exclude:
+    - 'Guardfile'
+
 PercentLiteralDelimiters:
   PreferredDelimiters:
     "%w": "[]"  # Arrays use brackets
