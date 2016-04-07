@@ -13,9 +13,9 @@ action :create do
   template nginx_available_file do
     source new_resource.template_source
     cookbook new_resource.template_cookbook
-    owner "root"
-    group "root"
-    mode "0644"
+    owner 'root'
+    group 'root'
+    mode '0644'
     variables(
       name: new_resource.name,
       listen: new_resource.listen,
@@ -47,7 +47,7 @@ end
 action :enable do
   if @current_resource.exists
     execute "nxensite #{new_resource.name}" do
-      command "#{node["nginx"]["bin_dir"]}/nxensite #{new_resource.name}"
+      command "#{node['nginx']['bin_dir']}/nxensite #{new_resource.name}"
       not_if { ::File.exist?(nginx_enabled_file) }
     end
   else
@@ -58,7 +58,7 @@ end
 action :disable do
   if @current_resource.exists
     execute "nxdissite #{new_resource.name}" do
-      command "#{node["nginx"]["bin_dir"]}/nxdissite #{new_resource.name}"
+      command "#{node['nginx']['bin_dir']}/nxdissite #{new_resource.name}"
       only_if { ::File.exist?(nginx_enabled_file) }
     end
   else
@@ -74,11 +74,11 @@ def load_current_resource
 end
 
 def nginx_available_file
-  "#{node["nginx"]["dir"]}/sites-available/#{new_resource.name}"
+  "#{node['nginx']['dir']}/sites-available/#{new_resource.name}"
 end
 
 def nginx_enabled_file
-  "#{node["nginx"]["dir"]}/sites-enabled/#{new_resource.name}"
+  "#{node['nginx']['dir']}/sites-enabled/#{new_resource.name}"
 end
 
 def log_missing_resource

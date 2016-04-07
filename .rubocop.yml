@@ -1,20 +1,15 @@
 LineLength:
-  Max: 80
+  Max: 200
+
+Style/RegexpLiteral:
   Exclude:
-    - "**/attributes/*.rb"
-    - "**/metadata.rb"
-
-StringLiterals:
-  EnforcedStyle: double_quotes
-
-StringLiteralsInInterpolation:
-  EnforcedStyle: double_quotes
+    - 'Guardfile'
 
 PercentLiteralDelimiters:
   PreferredDelimiters:
     "%w": "[]"  # Arrays use brackets
 
-SingleSpaceBeforeFirstArg:
+SpaceBeforeFirstArg:
   Enabled: false  # too strict about metadata and certain formatting
 
 inherit_from: test/support/rubocop/enabled.yml
