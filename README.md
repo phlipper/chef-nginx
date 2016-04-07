@@ -17,7 +17,9 @@ recipes should run on these platforms without error:
 
 ### Cookbooks
 
-* [apt](http://community.opscode.com/cookbooks/apt) Opscode LWRP Cookbook
+* [apt](http://supermarket.chef.io/cookbooks/apt) - apt Cookbook
+* [yum](http://supermarket.chef.io/cookbooks/yum) - yum Cookbook
+* [yum-nginx](http://supermarket.chef.io/cookbooks/yum-nginx) - yum-nginx Cookbook
 
 ### Chef
 
@@ -286,6 +288,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * Script for enabling and disabling sites, added and renamed by [@arvidbjorkstrom](https://github.com/arvidbjorkstrom)
 * **[@morr](https://github.com/morr)**
     * update `mime.types` to support web fonts correctly
+* **[@mengesb](https://github.com/mengesb)**
+    * add CentOS support
 
 
 ## License
